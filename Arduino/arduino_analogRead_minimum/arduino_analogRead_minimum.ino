@@ -28,4 +28,7 @@ void loop() {
   
   // print out the value you read:
   Serial.println(voltage);
+  
+  // Pause 1s (1000ms) between readings
+  delay(1000);
 }
