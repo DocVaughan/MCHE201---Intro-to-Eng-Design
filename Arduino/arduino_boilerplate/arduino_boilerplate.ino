@@ -23,7 +23,7 @@ int globalVariable;    // example declaration, globalVariable will be availble t
 void setup()
 {
   // variables declared inside a function are only available there
-  byte setupVariableOnly;    // This byte variable is only available in steup()
+  byte setupVariableOnly;    // This byte variable is only available in setup()
   
   // Your setup code goes here
 }

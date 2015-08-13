@@ -35,5 +35,6 @@ void loop() {
   // print out the state of the button
   Serial.println(buttonState);
   
-  delay(1);        // delay 1ms between reads for stability
+  // delay 1s (1000ms) between reads for stability
+  delay(1000);        
 }
