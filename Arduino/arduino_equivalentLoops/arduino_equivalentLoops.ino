@@ -18,12 +18,33 @@ void setup() {
 void loop() {
   Serial.println("For... loop starting");
   
-  for (int counter = 0; counter < 10; counter++)
+//  for (int counter = 0; counter < 10; counter++)
+//    {
+//    Serial.print("Counter = ");
+//    Serial.println(counter);
+//    delay(100);
+//    }
+
+  // This while loop is equivalent to the for loop above
+//  int counter = 0;  
+//  while (counter < 10)
+//    {
+//    Serial.print("Counter = ");
+//    Serial.println(counter);
+//    delay(100);
+//    counter++; // equivalent to counter = counter + 1; 
+//    }
+
+// This do... while loop is equivalent to the for loop above
+  int counter = 0;  
+  do
     {
     Serial.print("Counter = ");
     Serial.println(counter);
     delay(100);
-    }
+    counter++; // equivalent to counter = counter + 1; 
+    } while (counter < 10); 
+
 
   Serial.println("For... loop finished");
   Serial.println(""); 
