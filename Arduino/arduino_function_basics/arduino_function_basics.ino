@@ -17,10 +17,14 @@ void setup(){
 void loop() {
   int i = 2;
   int j = 3;
+  int m = 10;
   int k;
 
   k = myMultiplyFunction(i, j); // k now contains 6
   Serial.println(k);
+  delay(500);
+  k = myMultiplyFunction(i, m); // k should be 20
+  Serial.println(x);
   delay(500);
 }
 

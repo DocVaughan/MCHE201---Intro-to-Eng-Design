@@ -31,5 +31,14 @@ void loop() {
   // print a random number to the serial monitor
   Serial.println(randomNumber);
   
+  printSomeStuff();
+  
   delay(500);          // pause for 500ms
 }
+
+void printSomeStuff()
+{
+  Serial.print("Hello");
+  Serial.println(" Dr. Vaughan");
+}
+
