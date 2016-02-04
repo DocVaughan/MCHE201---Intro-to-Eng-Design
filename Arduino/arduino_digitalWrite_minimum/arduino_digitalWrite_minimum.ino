@@ -13,22 +13,24 @@ Modified:
 ------------------------------------------------------------------------------------*/
  
 // Pin 13 has an LED connected on most Arduino boards, including the RedBoard we have
-// name it led to make your code easier to read
-int LED = 13;
+// Name it LED to make your code easier to read
+// Adding the const in front will protect you from accidentally changing its value
+const int LED = 13;
+
 
 // This is always run once when the sketch starts
 void setup() {                
-  // initialize the digital pin as an output.
-  pinMode(LED, OUTPUT);     
+  pinMode(LED, OUTPUT);      // initialize the digital pin as an output
 }
+
 
 // This runs immediately after setup, looping indefinitely
 void loop() {
-  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(LED, HIGH);   // turn the LED on
   
-  delay(1000);               // wait for a second
+  delay(1000);               // wait for 1000ms = 1 second
   
-  digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(LED, LOW);    // turn the LED off
   
-  delay(1000);               // wait for a second
+  delay(1000);               // wait for 1000ms = 1 second
 }
