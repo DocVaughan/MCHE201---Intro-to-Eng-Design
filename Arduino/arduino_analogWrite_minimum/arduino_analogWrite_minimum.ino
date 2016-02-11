@@ -10,25 +10,28 @@ Modified:
   * 09/03/13 - Joshua Vaughan - joshua.vaughan@louisiana.edu
     - added our class boilerplate header
     - updated commenting to make consistent with our earlier examples
+  * 02/11/16 - Joshua Vaughan - ulamil
+    - updated commenting
+    - renamed variables for consistency with other examples
 ------------------------------------------------------------------------------------*/
 
 // Assume Pin 9 has an LED connected 
 // name it led to make your code easier to read
-int ledPin = 9;      // an LED connected to digital pin 9
+const int LED_PIN = 5;      // an LED connected to digital pin 5
 
 
 // This is always run once when the sketch starts
 void setup()
 {
-  pinMode(ledPin, OUTPUT);   // sets the pin as output
+  pinMode(LED_PIN, OUTPUT);   // sets the pin as output
 }
 
 
 // This runs immediately after setup, looping indefinitely
 void loop()
 {
-  byte duty_cycle = 255;            // the duty cycle, between 0-255 (0-100%)
+  byte duty_cycle = 15;            // the duty cycle, between 0-255 (0-100%)
 
   // analogWrite duty_cycle values from 0 to 255 correspond to duty cycles 0-100%
-  analogWrite(ledPin, duty_cycle);  
+  analogWrite(LED_PIN, duty_cycle);  
 }
