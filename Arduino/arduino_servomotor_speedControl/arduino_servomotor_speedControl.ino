@@ -98,28 +98,29 @@ void setup()
 
 void loop()
 {
-  int servo_angle;  // Define a variable to hold the desired servo angle
+    int servo_angle;  // Define a variable to hold the desired servo angle
 
-  servo_9.write(30);  // Move the servo to 30 deg to set up the code below
+    servo_9.write(30);  // Move the servo to 30 deg to set up the code below
   
-  // To slow down the servo's motion, we'll use a for() loop
-  // to give it a bunch of intermediate positions, with 20ms
-  // delays between them. You can change the step size to make 
-  // the servo slow down or speed up. Note that the servo can't
-  // move faster than its full speed, and you won't be able
-  // to update it any faster than every 20ms.
-
-  // Tell servo to go to from 30deg to 180deg, stepping by two degrees
-  for(servo_angle = 30; servo_angle < 150; servo_angle += 2)
-  {
-    servo_9.write(servo_angle);  // Move to next position
-    delay(20);                  // Short pause to allow it to move
-  }
-
-  // Tell servo to go to 30 degrees, stepping by one degree
-  for(servo_angle = 150; servo_angle >= 0; servo_angle -= 1)
-  {                                
-    servo_9.write(servo_angle);  // Move to next position
-    delay(20);                  // Short pause to allow it to move
-  }
+   // Change position at a slower speed:
+  
+    // To slow down the servo's motion, we'll use a for() loop
+    // to give a series intermediate positions, with delays between them.
+    // The step size and delay can be changed to make the servo slow down
+    // or speed up. Note that the servo can't move faster than its full
+    // speed, so you can't update it any faster than every 20ms.
+  
+    // Tell servo to go to 150 degrees, stepping by two degrees every 20ms
+    for (servo_angle = 30; servo_angle <= 150; servo_angle += 2)
+    {
+        servo_9.write(servo_angle);  // Move to next position
+        delay(20);                   // Short pause to allow it to move
+    }
+  
+    // Tell servo to go to 30 degrees, stepping by one degree every 40ms
+    for (servo_angle = 150; servo_angle >= 30; servo_angle -= 1)
+    {
+        servo_9.write(servo_angle);  // Move to next position
+        delay(40);                   // Short pause to allow it to move
+    }
 }

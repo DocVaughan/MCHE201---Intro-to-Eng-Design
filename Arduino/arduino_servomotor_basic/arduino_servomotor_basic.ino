@@ -94,9 +94,7 @@ void setup()
 
 
 void loop()
-{
-    int servo_angle;  // Define a variable to hold the desired servo angle
-  
+{ 
     // the easiesst way to control a servo, is to give it the angle
     // you'd like it to turn to. Servos cannot turn a full 360 degrees,
     // but you can tell it to move anywhere between ~0 and ~180 degrees.
@@ -104,7 +102,6 @@ void loop()
     // NOTE: I would avoid moving to the extremes of the servo range
     // Cheap-ish servos can behave strangely there, and you will be
     // *way* more likely to damage your servo near its limits.
-  
   
     // This is the simplest way to control a servo. You have no control over
     // the speed at which the motion is conducted. Also, the code will continue
@@ -124,29 +121,4 @@ void loop()
     servo_9.write(30);    // Tell servo to go to 30 degrees
   
     delay(1000);         // Pause to get it time to move
-  
-  
-  
-  
-    // Change position at a slower speed:
-  
-    // To slow down the servo's motion, we'll use a for() loop
-    // to give a series intermediate positions, with delays between them.
-    // The step size and delay can be changed to make the servo slow down
-    // or speed up. Note that the servo can't move faster than its full
-    // speed, so you can't update it any faster than every 20ms.
-  
-    // Tell servo to go to 150 degrees, stepping by two degrees every 20ms
-    for (servo_angle = 30; servo_angle <= 150; servo_angle += 2)
-    {
-        servo_9.write(servo_angle);  // Move to next position
-        delay(20);                   // Short pause to allow it to move
-    }
-  
-    // Tell servo to go to 30 degrees, stepping by one degree every 40ms
-    for (servo_angle = 150; servo_angle >= 30; servo_angle -= 1)
-    {
-        servo_9.write(servo_angle);  // Move to next position
-        delay(40);                   // Short pause to allow it to move
-    }
 }
