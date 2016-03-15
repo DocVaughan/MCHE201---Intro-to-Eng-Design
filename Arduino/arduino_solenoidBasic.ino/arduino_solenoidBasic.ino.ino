@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------------
-arduino_solenoidSwitch.ino
+arduino_solenoidBasic.ino
 
-Retract a solenoid if a switch is pressed 
+Retract a solenoid ona timer
 
 For use with the Adafruit Motor Shield v2 
 http://www.adafruit.com/products/1438
@@ -40,9 +40,6 @@ void setup() {
   Serial.begin(9600);        // set up Serial library at 9600 bps
 
   AFMS.begin();  // create with the default frequency 1.6KHz
- 
-  //configure the motor_switch as an input and enable the internal pull-up resistor
-  pinMode(solenoid_switch, INPUT_PULLUP);
 
   // Set the speed to maximum for solenoid
   solenoid->setSpeed(255);
@@ -51,23 +48,15 @@ void setup() {
 
 
 void loop() {    
-  // If the button is pressed, retrac the solenoid
-  if(!digitalRead(solenoid_switch))
-  {
-      Serial.println("Button Pressed. Retracting solenoid...");
-      // full speed forward just passes maximum current to enable solenoid
-      solenoid->run(FORWARD);
-      
-      // pause 10ms
-      delay(10);
-      
-      // Stop the solenoid 
-      solenoid->run(RELEASE); 
-          
-      // Delay for 1000 ms before continuing (avoiding solenoid burnout)
-      delay(1000);
-  }
+    // full speed forward just passes maximum current to enable solenoid
+    solenoid->run(FORWARD);
     
-  // Delay for 10 ms before looping and checking the swtich again
-  delay(10);
+    // pause 10ms
+    delay(10);
+    
+    // Stop the solenoid 
+    solenoid->run(RELEASE); 
+        
+    // Delay for 1000 ms before continuing (avoiding solenoid burnout)
+    delay(1000);
 }
