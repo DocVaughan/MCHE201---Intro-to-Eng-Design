@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------------
-arduino_IRsensorBasic.ino
+arduino_031716_IRSensor_LectureExercise2.ino
 
-Bare minimum to read the IR sensor and print to serial monitor
+ Read the IR sensor and lights an LED if an object is closer than 10cm
 
 For the MCHE201 IR sensor:
  * Rad - +5VDC
@@ -22,11 +22,17 @@ Modified:
   *
 ------------------------------------------------------------------------------------*/
 
+// Define the LED pin
+const byte LED_pin = 13;
+
 // This is always run once when the sketch starts
 // Use to initialize variables, pin modes, libraries, communication, etc
 void setup() {
   // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
+
+  // set up the LED as an ouput
+  pinMode(LED_pin, OUTPUT);
 }
 
 // the loop routine runs over and over again forever:
@@ -44,21 +50,16 @@ void loop() {
   Serial.print(voltage);
   Serial.println("V");
 
-  // TODO: Complete curve fit for voltage -> distance
-//
-//  if ((distance > 30) || (distance < 4))
-//  {
-//    // If the caculated value is outside the sensor specs warn the user
-//    Serial.println("Calculated distance was outside of sensor range. Do NOT trust.");
-//  }
-//  else // we got a reasonable value
-//  {
-//      // print out the raw value you read
-//      Serial.print("The approximate distance is ");
-//      Serial.print(distance);
-//      Serial.println(" cm.");
-//  }
-//
+  if (voltage > 1.0) {
+    Serial.println("Turning the LED on.");
+    digitalWrite(LED_pin, HIGH);
+  }
+  else {
+    Serial.println("The LED should be off.");
+    digitalWrite(LED_pin, LOW);
+  }
+
+  // print an empty line
   Serial.println("");
   
   // Pause 1s (1000ms) between readings
