@@ -1,35 +1,120 @@
-#! /usr/bin/env python
-
-###############################################################################
-# MCHE201_ControlBox.py
-#
-# Code to control the MCHE201 competition
-#  1. Listens for switch to be pressed
-#  2. When pressed, closes all 8 relays for 30sec
-#
-#
-# Created: 11/03/15
-#   - Joshua Vaughan
-#   - joshua.vaughan@louisiana.edu
-#   - http://www.ucs.louisiana.edu/~jev9637
-#
-# Modified:
-#   * 03/31/16 - Joshua Vaughan - joshua.vaughan@louisiana.edu
-#       - updated for Python 3 
-#       - Replaced PiFace with Ocean Control USB relays
-#
-###############################################################################
-
-# import from __future__ for Python 2 people
-from __future__ import division, print_function, unicode_literals
-
-
-import numpy as np
-import serial
 import time
+import logging
+import serial
+import threading
+from threading import Thread
 
-# Configuration Parameters
+from flask import Flask, render_template, session, request
+from flask_socketio import SocketIO, emit, join_room, leave_room, \
+    close_room, rooms, disconnect
+
+
+logging.basicConfig(level=logging.DEBUG,
+                    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
+                    )
+
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
+thread = None
+
+
+start = False
 ON_RASPPI = True
+HARDWARE_CONNECTED = True
+ROUND_DURATION = 30.0
+
+
+@app.route('/')
+def full():
+    return render_template('index.html')
+
+@app.route('/')
+def sections():
+    return render_template('sections.html')
+
+
+@socketio.on('my event', namespace='/MCHE201')
+def test_message(message):
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my response',
+         {'data': message['data'], 'count': session['receive_count']})
+
+
+@socketio.on('my broadcast event', namespace='/MCHE201')
+def test_broadcast_message(message):
+    global start
+    
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    
+    logging.debug('Message data = {}'.format(message['data']))
+    
+    if message['data'] == 1111:
+        logging.debug('Message data = {}'.format(message['data']))
+        
+        with lock:
+            start = True
+            
+    elif message['data'] == 0:
+        logging.debug('Message data = {}'.format(message['data']))
+        
+        with lock:
+            start = False
+
+
+# @socketio.on('join', namespace='/MCHE201')
+# def join(message):
+#     join_room(message['room'])
+#     session['receive_count'] = session.get('receive_count', 0) + 1
+#     emit('my response',
+#          {'data': 'In rooms: ' + ', '.join(request.namespace.rooms),
+#           'count': session['receive_count']})
+# 
+# 
+# @socketio.on('leave', namespace='/MCHE201')
+# def leave(message):
+#     leave_room(message['room'])
+#     session['receive_count'] = session.get('receive_count', 0) + 1
+#     emit('my response',
+#          {'data': 'In rooms: ' + ', '.join(request.namespace.rooms),
+#           'count': session['receive_count']})
+# 
+# 
+# @socketio.on('close room', namespace='/MCHE201')
+# def close(message):
+#     session['receive_count'] = session.get('receive_count', 0) + 1
+#     emit('my response', {'data': 'Room ' + message['room'] + ' is closing.',
+#                          'count': session['receive_count']},
+#          room=message['room'])
+#     close_room(message['room'])
+# 
+# 
+# @socketio.on('my room event', namespace='/MCHE201')
+# def send_room_message(message):
+#     session['receive_count'] = session.get('receive_count', 0) + 1
+#     emit('my response',
+#          {'data': message['data'], 'count': session['receive_count']},
+#          room=message['room'])
+
+
+@socketio.on('disconnect request', namespace='/MCHE201')
+def disconnect_request():
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my response',
+         {'data': 'Disconnected!', 'count': session['receive_count']})
+    disconnect()
+
+
+@socketio.on('connect', namespace='/MCHE201')
+def test_connect():
+    emit('my response', {'data': 'Connected', 'duration': ROUND_DURATION})
+
+
+@socketio.on('disconnect', namespace='/MCHE201')
+def test_disconnect():
+    print('Client disconnected')
+
 
 class oceanControls(object):
     """ Class to wrap the ASCII protocol for controlling the Ocean Controls
@@ -239,14 +324,81 @@ class oceanControls(object):
             raise ValueError('Please enter a digital input number between 1 and 4.')
 
 
-if __name__ == "__main__":
+class hardware_loop(threading.Thread):
+    """
+    Class to control the threaded hardware loop
+    """
+    def __init__(self):
+        threading.Thread.__init__(self, name = 'Hardware')
+        logging.debug('Hardware thread starting...')
+        self.running = True
     
-    if ON_RASPPI:
-     #   Define an instance of the oceanControls class for use on Rasp Pi
-        controller = oceanControls('/dev/ttyUSB0')
-    else:
-        # Define an instance of the oceanControls class on Dr. Vaughan's MacBook
-        controller = oceanControls('/dev/tty.usbserial-AL01H195')
+    def run(self):
+        """
+        Main control loop
+        """
+        global start
+        
+        logging.debug('Hardware thread running...')
+        
+        while self.running:
+            if start:
+                logging.info('Starting Countdown...')
+                
+                # Close all the relays
+                if HARDWARE_CONNECTED:
+                    # Open all the relays
+                    controller.turnAllOn()
+                    
+                logging.info('Turning all on.')
+            
+                start_time = time.time()
+                while time.time() - start_time < ROUND_DURATION:
+                    elapsed_time = time.time() - start_time
+                    
+#                     if start:
+#                         logging.debug('Elapsed Time {:0.2f}'.format(elapsed_time))
+#                     else:
+#                         if HARDWARE_CONNECTED:
+#                             # Open all the relays
+#                             controller.turnAllOff()
+# 
+#                         logging.info('Turning all off.')
+#                         break
+                    
+                    socketio.emit('my response',
+                      {'data': 'time', 'elapsed_time': '{:0f}'.format(elapsed_time)},
+                      namespace='/MCHE201')
+                      
+                    time.sleep(0.2)
+                    
+                else:
+                    if HARDWARE_CONNECTED:
+                        controller.turnAllOff()
+
+                    logging.info('Turning all off.')
+                    socketio.emit('my response',
+                      {'data': '0000'},
+                      namespace='/MCHE201')
+                    
+            with lock:
+                start = False
+                
+            time.sleep(0.5)
+                     
+    def stop(self):
+        self.running = False
+
+
+if __name__ == '__main__':
+
+    if HARDWARE_CONNECTED:
+        if ON_RASPPI:
+         #   Define an instance of the oceanControls class for use on Rasp Pi
+            controller = oceanControls('/dev/ttyUSB0')
+        else:
+            # Define an instance of the oceanControls class on Dr. Vaughan's MacBook
+            controller = oceanControls('/dev/tty.usbserial-AL01H195')
     
     # Now the relationship between the Ocean Controller outputs and the track
     # Define the values for red then increment around the track CW
@@ -266,26 +418,21 @@ if __name__ == "__main__":
     
     # Define the digital input position of the hardware switch
     hardware_start_switch = 4
-    
-    try:
-        while True:
-            if controller.isDigitalInputOn(hardware_start_switch):
-                # Close all the relays
-                controller.turnAllOn()
-            
-                # Get the current time
-                start_time = time.time()
-            
-                # Keep the relays closed for 30 seconds
-                while (time.time() - start_time < 30):
-                    time.sleep(0.1)
-            
-                # Open all the relays
-                controller.turnAllOff()
-            
-            # sleep 0.1s between checks of the start switch
-            time.sleep(0.1)
 
-    except(KeyboardInterrupt, SystemExit):
-        controller.turnAllOff()
-        controller.ser.close()
+    # Create a lock
+    lock = threading.Lock()
+    
+    #     hardware_thread = threading.Thread(name = 'Hardware', target = hardware_loop)
+    hardware_thread = hardware_loop()
+    hardware_thread.daemon = True
+    hardware_thread.start()
+    
+    try:  
+        logging.debug('Starting Flask app')
+        socketio.run(app, host='0.0.0.0', port=5000)
+        #socketio.run(app)
+        
+    except (KeyboardInterrupt, SystemExit):
+        hardware_thread.stop()
+        hardware_thread.join()
+        logging.debug('KeyboardInterrupt or SystemExit exception. Exiting.\n\n')
