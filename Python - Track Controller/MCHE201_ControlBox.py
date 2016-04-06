@@ -14,19 +14,26 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 03/31/16 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+#    * 03/31/16 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #       - updated for Python 3 
 #       - Replaced PiFace with Ocean Control USB relays
+#    * 04/05/16 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+#       - added second read of button, pushing after initial will cancel
+#       - Adding logging
 #
 ###############################################################################
 
 # import from __future__ for Python 2 people
 from __future__ import division, print_function, unicode_literals
 
-
+import logging
 import numpy as np
 import serial
 import time
+
+logging.basicConfig(level=logging.DEBUG,
+                    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
+                    )
 
 # Configuration Parameters
 ON_RASPPI = True
@@ -270,22 +277,36 @@ if __name__ == "__main__":
     try:
         while True:
             if controller.isDigitalInputOn(hardware_start_switch):
+                logging.debug('Starting round...')
+                
                 # Close all the relays
                 controller.turnAllOn()
-            
+                
                 # Get the current time
                 start_time = time.time()
-            
+                
+                # Pause for 1s to keep from triggering stop 
+                time.sleep(1)
+                
                 # Keep the relays closed for 30 seconds
                 while (time.time() - start_time < 30):
                     time.sleep(0.1)
-            
+
+                    # Check to see if the switch is pressed to cancel
+                    if controller.isDigitalInputOn(hardware_start_switch):
+                        logging.debug('Switched pressed to cancel round.')
+                        controller.turnAllOff()
+                        break
+
                 # Open all the relays
                 controller.turnAllOff()
+                logging.debug('Finished 30 second round. Ready for next.')
+                
             
             # sleep 0.1s between checks of the start switch
             time.sleep(0.1)
 
     except(KeyboardInterrupt, SystemExit):
+        logging.debug('Exiting.')
         controller.turnAllOff()
         controller.ser.close()
