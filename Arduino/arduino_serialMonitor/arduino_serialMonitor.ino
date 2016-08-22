@@ -27,10 +27,16 @@ void loop() {
   
   // assign a random value between 0 and 100
   randomNumber = random(0,100);
+
+  // print an empty line, to make the output easier to read
+  Serial.println("");
+  
+  // print a random number, with label, to the serial monitor
+  Serial.print("randomNumber = ");
   
   // print a random number to the serial monitor
   Serial.println(randomNumber);
-  
+
   printSomeStuff();
   
   delay(500);          // pause for 500ms

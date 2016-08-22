@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
 filename.ino
 
 Some description of functionality
@@ -13,10 +13,10 @@ Modified:
     - major change 2
   * mm/dd/yy - Name (email if not same person as above)
     - major change 1
-------------------------------------------------------------------------------------*/
+-----------------------------------------------------------------------------*/
 
 // Variables declared here are global
-int globalVariable;    // example declaration, globalVariable will be availble to all
+int globalVariable;    // example declaration, globalVariable is available to all
 
 // This is always run once when the sketch starts
 // Use to initialize variables, pin modes, libraries, communication, etc

@@ -7,31 +7,37 @@ From: http://arduino.cc/en/Tutorial/Blink
       This example code is in the public domain.
 
 Created: 02/03/15 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+
+Modified: 
+  * 02/04/16 - JEV - joshua.vaughan@louisiana.edu
+    - made the LED declaration constant
+    - updated formatting to match other examples
 ------------------------------------------------------------------------------------*/
  
 // Pin 13 has an LED connected on most Arduino boards, including the RedBoard we have
-// name it LED to make your code easier to read
-int LED = 13;
+// Name it LED to make your code easier to read
+// Adding the const in front will protect yoru from accidentally changing its value
+const int LED = 13;
 
 // This is always run once when the sketch starts
 void setup() {                
-  // initialize the digital pin as an output.
-  pinMode(LED, OUTPUT);     
+  pinMode(LED, OUTPUT);     // initialize the digital pin as an output.
 }
+
 
 // This runs immediately after setup, looping indefinitely
 void loop() {
-  blink_LED();
+  blinkLED();               // Call the blinkLED function
 }
 
 
-void blink_LED(){
+void blinkLED() {
   // Blink the LED
-  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(LED, HIGH);   // turn the LED on
   
-  delay(1000);               // wait for a second
+  delay(1000);               // wait for 1000ms = 1 second
   
-  digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(LED, LOW);    // turn the LED off
   
-  delay(1000);               // wait for a second
+  delay(1000);               // wait for 1000ms = 1 second
 }
