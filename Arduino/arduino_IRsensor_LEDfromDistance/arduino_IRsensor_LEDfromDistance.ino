@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------------
-arduino_031716_IRSensor_LectureExercise2.ino
+arduino_IRsensor_LEDfromDistance.ino
 
  Read the IR sensor and lights an LED if an object is closer than 10cm
 

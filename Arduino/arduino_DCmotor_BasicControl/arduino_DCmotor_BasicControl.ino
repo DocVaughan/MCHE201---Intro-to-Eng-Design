@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------------
-arduino_031716_DCmotor_LectureExercise1.ino
+arduino_DCmotor_BasicControl.ino
 
 Makes a DC motor run for 2s, pause for 2s, run for 2s, pause for 2s, ...
 
