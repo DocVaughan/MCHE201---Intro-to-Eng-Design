@@ -32,9 +32,20 @@ void loop() {
   
   // read the input on analog pin 0, which is where potentiometer is connected
   int sensor_value = analogRead(A0);
-  
-  // Now, let's beep at a frequency proportional to the sensor reading
-  tone(BUZZER_PIN, sensor_value + 250);   // output a tone proportional to sensor_value
+
+  // Uncomment below to output the sensor value for debugging
+  // Serial.println(sensor_value);
+
+  // Create a dead zone around 0, since the analog reading will not be exactly
+  // zero when the sensor is not being touched. You may need to tune this to 
+  // match your particular sensor.
+  if (sensor_value > 50) {
+    // Now, let's beep at a frequency proportional to the sensor reading
+    tone(BUZZER_PIN, sensor_value+250);   // output a tone proportional to sensor_value
+  }
+  else { // not touching, so no sound
+    noTone(BUZZER_PIN);
+  }
   
   // Pause 10ms) between readings
   delay(10);

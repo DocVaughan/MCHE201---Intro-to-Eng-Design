@@ -60,7 +60,7 @@ void loop() {
   button1_state = digitalRead(BUTTON_1);
   button2_state = digitalRead(BUTTON_2);
 
-  int number_of_buttons = button1_state + button2_state;
+  int number_of_buttons = !button1_state + !button2_state;
 
   if (number_of_buttons == 0) {
       // print out the state of the button
@@ -93,7 +93,7 @@ void loop() {
       digitalWrite(RED_PIN, HIGH);
 
       // Turn the green and blue LEDs off
-      digitalWrite(GREEN_PIN, HIGH);
+      digitalWrite(GREEN_PIN, LOW);
       digitalWrite(BLUE_PIN, LOW);
   }
   

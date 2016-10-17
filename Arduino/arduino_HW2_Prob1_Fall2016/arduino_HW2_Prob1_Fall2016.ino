@@ -44,8 +44,8 @@ void loop() {
   // to the servo's range of 0 to 180 degrees. The flex sensors
   // we use are usually in the 600-900 range:
   
-  int servo_position = map(flex_value, 600, 900, 0, 180);
-  servo_position = constrain(servo_position, 0, 180);
+  int servo_position = map(flex_value, 600, 900, 30, 150);
+  servo_position = constrain(servo_position, 30, 150);
 
   // Now we'll command the servo to move to that position:
   servo1.write(servo_position);
