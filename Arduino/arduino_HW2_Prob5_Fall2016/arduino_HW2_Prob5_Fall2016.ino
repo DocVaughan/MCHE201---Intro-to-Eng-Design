@@ -15,7 +15,8 @@ Modified:
 ------------------------------------------------------------------------------------*/
 
 // Define the buzzer pin
-const int BUZZER_PIN = 9;  
+const int BUZZER_PIN = 9; 
+const int BUZZER_FREQ = 262; // a C note  
 
 // This is always run once when the sketch starts
 // Use to initialize variables, pin modes, libraries, communication, etc
@@ -31,18 +32,22 @@ void setup() {
 void loop() {
   
   // read the input on analog pin 0:
-  int sensorValue = analogRead(A0);
+  int sensor_value = analogRead(A0);
 
   // if the sensor sees light, turn on the buzzer, else turn it off
   if (sensor_value > 512 ) {
     // turn on the buzzer
-    tone(BUZZER_PIN, buzzer_freq);
+    tone(BUZZER_PIN, BUZZER_FREQ);
+
+    // output to serial monitor for debugging
     Serial.println("I see the light!");
   }
   else {
     // turn off the buzzer
     noTone(BUZZER_PIN);
-    Serial.println("Darkness surrounds me.")
+
+    // output to serial monitor for debugging
+    Serial.println("Darkness surrounds me.");
   }
 
   // Pause 10ms between readings

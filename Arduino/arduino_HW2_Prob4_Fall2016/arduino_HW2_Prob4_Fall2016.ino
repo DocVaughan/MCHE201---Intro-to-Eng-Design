@@ -33,7 +33,7 @@ void loop() {
   // read the input on analog pin 0, which is where potentiometer is connected
   int sensor_value = analogRead(A0);
   
-  // Now, let's beep once to let us know the set up function finished
+  // Now, let's beep at a frequency proportional to the sensor reading
   tone(BUZZER_PIN, sensor_value + 250);   // output a tone proportional to sensor_value
   
   // Pause 10ms) between readings

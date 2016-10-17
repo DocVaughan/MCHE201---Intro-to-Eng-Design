@@ -67,11 +67,11 @@ void loop() {
       Serial.println("No buttons were pressed. Turning green LED on.");
     
       // Turn the green LED on
-      digitalWrite(GREEN_LED, HIGH);
+      digitalWrite(GREEN_PIN, HIGH);
     
       // Turn the red and blue LEDs off
-      digitalWrite(RED_LED, LOW);
-      digitalWrite(BLUE_LED, LOW);  
+      digitalWrite(RED_PIN, LOW);
+      digitalWrite(BLUE_PIN, LOW);  
   }
   else if (number_of_buttons == 1) {
       // print out the state of the button
@@ -79,22 +79,22 @@ void loop() {
     
       // Turn the red and green LEDs on, combingin light is different than pigments
       // https://en.wikipedia.org/wiki/RGB_color_model
-      digitalWrite(RED_LED, HIGH);
-      digitalWrite(GREEN_LED, HIGH);
+      digitalWrite(RED_PIN, HIGH);
+      digitalWrite(GREEN_PIN, HIGH);
       
       // Turn the blue LED off
-      digitalWrite(BLUE_LED, LOW);
+      digitalWrite(BLUE_PIN, LOW);
   }
   else {
       // print out the state of the button
       Serial.println("Two buttons were pressed. Turning red LED on.");
     
       // Turn the red LED on
-      digitalWrite(RED_LED, HIGH);
+      digitalWrite(RED_PIN, HIGH);
 
       // Turn the green and blue LEDs off
-      digitalWrite(GREEN_LED, HIGH);
-      digitalWrite(BLUE_LED, LOW);
+      digitalWrite(GREEN_PIN, HIGH);
+      digitalWrite(BLUE_PIN, LOW);
   }
   
   // delay 10ms between reads for stability
