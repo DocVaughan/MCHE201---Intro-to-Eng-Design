@@ -5,7 +5,7 @@
 #
 # Code to control the MCHE201 competition
 #  1. Listens for switch to be pressed
-#  2. When pressed, closes all 8 relays for 30sec
+#  2. When pressed, closes all 8 relays and runs motor for 30sec
 #
 #
 # Created: 11/03/15
@@ -20,6 +20,8 @@
 #    * 04/05/16 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #       - added second read of button, pushing after initial will cancel
 #       - Adding logging
+#   * 11/01/16 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+#       - Added motor control with Adafruit Raspberry Pi Hat
 #
 ###############################################################################
 
@@ -31,12 +33,16 @@ import numpy as np
 import serial
 import time
 
+from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
+
 logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) %(message)s',
                     )
 
 # Configuration Parameters
 ON_RASPPI = True
+DC_MOTOR_PIN = 1
+hardware_start_switch = 4 # Define the digital input position of the hardware switch
 
 class oceanControls(object):
     """ Class to wrap the ASCII protocol for controlling the Ocean Controls
@@ -246,6 +252,13 @@ class oceanControls(object):
             raise ValueError('Please enter a digital input number between 1 and 4.')
 
 
+# recommended for auto-disabling motors on shutdown!
+def turnOffAllMotors():
+    motorHat.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
+    motorHat.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
+    motorHat.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
+    motorHat.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
+
 if __name__ == "__main__":
     
     if ON_RASPPI:
@@ -254,6 +267,10 @@ if __name__ == "__main__":
     else:
         # Define an instance of the oceanControls class on Dr. Vaughan's MacBook
         controller = oceanControls('/dev/tty.usbserial-AL01H195')
+        
+    # Create the motor controller instance and a DC motor object
+    motorHat = Adafruit_MotorHAT(addr=0x60)
+    spinMotor = motorHat.getMotor(DC_MOTOR_PIN)
     
     # Now the relationship between the Ocean Controller outputs and the track
     # Define the values for red then increment around the track CW
@@ -271,9 +288,6 @@ if __name__ == "__main__":
     yellow_relay = black_relay + 1
     yellow_LED = black_LED + 1
     
-    # Define the digital input position of the hardware switch
-    hardware_start_switch = 4
-    
     try:
         while True:
             if controller.isDigitalInputOn(hardware_start_switch):
@@ -281,6 +295,10 @@ if __name__ == "__main__":
                 
                 # Close all the relays
                 controller.turnAllOn()
+                
+                # Start the motor      
+                spinMotor.run(Adafruit_MotorHAT.FORWARD)          
+                spinMotor.setSpeed(255)
                 
                 # Get the current time
                 start_time = time.time()
@@ -296,17 +314,22 @@ if __name__ == "__main__":
                     if controller.isDigitalInputOn(hardware_start_switch):
                         logging.debug('Switched pressed to cancel round.')
                         controller.turnAllOff()
+                        spinMotor.run(Adafruit_MotorHAT.RELEASE)
                         break
 
                 # Open all the relays
                 controller.turnAllOff()
+                
+                # Stop the motor
+                spinMotor.run(Adafruit_MotorHAT.RELEASE)
+                
                 logging.debug('Finished 30 second round. Ready for next.')
                 
-            
             # sleep 0.1s between checks of the start switch
             time.sleep(0.1)
 
     except(KeyboardInterrupt, SystemExit):
         logging.debug('Exiting.')
+        turnOffAllMotors()
         controller.turnAllOff()
         controller.ser.close()
