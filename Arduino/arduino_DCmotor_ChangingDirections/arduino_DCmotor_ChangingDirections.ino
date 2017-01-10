@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------------
-arduino_031716_DCmotor_LectureExercise2.ino
+arduino_DCmotor_ChangingDirections.ino
 
 Make a DC motor run one direction for 2s, pause for 1s, then run the opposite 
 direction for 5s and pause for 1s. Repeat this 5 times only.

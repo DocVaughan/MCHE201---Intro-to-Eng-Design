@@ -1,6 +1,6 @@
 
 /*------------------------------------------------------------------------------------
-arduino_020416_LectureExercise2.ino
+arduino_Pushbutton_LEDtoggle.ino
 
 Reads the status of a switch attached to pin 2 and toogles the state of onboard LED
 with each press
