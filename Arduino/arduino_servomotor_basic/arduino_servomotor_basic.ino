@@ -67,7 +67,7 @@
 // Once you "include" a library, you'll have access to those functions.
 #include <Servo.h>  // include the servo library
 
-const byte SERVO_PIN = 9;   // Define the pin teh servo is attached to
+const byte SERVO_PIN = 10;   // Define the pin teh servo is attached to
 
 // Now we'll create a servo "object". Create one of these for each servo
 // to control, up to a maximum of twelve servos.

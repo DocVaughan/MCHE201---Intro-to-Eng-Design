@@ -14,9 +14,8 @@ https://github.com/ladyada/Adafruit_Motor_Shield_V2_Library/archive/master.zip
 Created: 10/27/15 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 
 Modified:
-  * mm/dd/yy - Name (email if not same person as above)
-    - major change 1
-    - major change 2
+  * 03/02/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+    - Changed max duty cycle of solenoid to better match its properties
   * mm/dd/yy - Name (email if not same person as above)
     - major change 1
 ------------------------------------------------------------------------------------*/
@@ -44,8 +43,10 @@ void setup() {
   //configure the motor_switch as an input and enable the internal pull-up resistor
   pinMode(solenoid_switch, INPUT_PULLUP);
 
-  // Set the speed to maximum for solenoid
-  solenoid->setSpeed(255);
+
+  // Set the speed to maximum for solenoid 
+  // We want ~5V out... 5V out / 12V max ~= 100 duty cycle / 255 max duty cycle
+  solenoid->setSpeed(100);
   
 }
 
@@ -59,7 +60,7 @@ void loop() {
       solenoid->run(FORWARD);
       
       // pause 10ms
-      delay(10);
+      delay(100);
       
       // Stop the solenoid 
       solenoid->run(RELEASE); 
