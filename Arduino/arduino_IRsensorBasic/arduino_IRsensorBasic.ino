@@ -45,20 +45,7 @@ void loop() {
   Serial.println("V");
 
   // TODO: Complete curve fit for voltage -> distance
-//
-//  if ((distance > 30) || (distance < 4))
-//  {
-//    // If the caculated value is outside the sensor specs warn the user
-//    Serial.println("Calculated distance was outside of sensor range. Do NOT trust.");
-//  }
-//  else // we got a reasonable value
-//  {
-//      // print out the raw value you read
-//      Serial.print("The approximate distance is ");
-//      Serial.print(distance);
-//      Serial.println(" cm.");
-//  }
-//
+
   Serial.println("");
   
   // Pause 1s (1000ms) between readings

@@ -40,7 +40,8 @@ logging.basicConfig(level=logging.DEBUG,
                     )
 
 # Configuration Parameters
-ON_RASPPI = True
+ON_RASPPI_TRACK1 = False
+ON_RASPPI_TRACK2 = True
 DC_MOTOR_PIN = 1
 hardware_start_switch = 4 # Define the digital input position of the hardware switch
 
@@ -261,8 +262,11 @@ def turnOffAllMotors():
 
 if __name__ == "__main__":
     
-    if ON_RASPPI:
-     #   Define an instance of the oceanControls class for use on Rasp Pi
+    if ON_RASPPI_TRACK1:
+        # Define an instance of the oceanControls class for use on Rasp Pi
+        controller = oceanControls('/dev/ttyUSB0')
+    if ON_RASPPI_TRACK2: # Identical to Track 1 for now
+        # Define an instance of the oceanControls class for use on Rasp Pi
         controller = oceanControls('/dev/ttyUSB0')
     else:
         # Define an instance of the oceanControls class on Dr. Vaughan's MacBook
