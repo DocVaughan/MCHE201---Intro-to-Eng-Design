@@ -20,7 +20,7 @@ import time # import the time module
 
 # Assign the output pint to variable output_pin
 # We set it up as an output with a pulldown resistor
-output_pin = pyb.Pin('X1', pyb.Pin.OUT_PP, pull=pyb.Pin.PULL_DOWN)
+output_pin = pyb.Pin('X3', pyb.Pin.OUT_PP, pull=pyb.Pin.PULL_DOWN)
 
 # This for loop will run 5 times
 for counter in range(10):

@@ -24,10 +24,10 @@ GREEN_LED = pyb.LED(2)
 YELLOW_LED = pyb.LED(3)
 BLUE_LED = pyb.LED(4)
 
-# This for loop will run 10 times to light the LEDS 5 times
+# This for loop will run 10 times to light the LEDs 5 times
 for counter in range(10):
-	RED_LED.toggle()     # Toggle the RED_LED
-	GREEN_LED.toggle()   # Toggle the GREEN_LED
-	YELLOW_LED.toggle()  # Toggle the YELLOW_LED
-	BLUE_LED.toggle()    # Toggle the BLUE_LED
-	time.sleep(2)        # Sleep 2 seconds
+    RED_LED.toggle()     # Toggle the RED_LED
+    GREEN_LED.toggle()   # Toggle the GREEN_LED
+    YELLOW_LED.toggle()  # Toggle the YELLOW_LED
+    BLUE_LED.toggle()    # Toggle the BLUE_LED
+    time.sleep(2)        # Sleep 2 seconds

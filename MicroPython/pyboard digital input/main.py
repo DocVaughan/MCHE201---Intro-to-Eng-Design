@@ -21,7 +21,7 @@ import time # import the time module
 
 # Assign the input pin to variable input_pin
 # We set it up as an input with a pulldown resistor
-input_pin = pyb.Pin('X1', pyb.Pin.IN, pull=pyb.Pin.PULL_DOWN)
+input_pin = pyb.Pin('X3', pyb.Pin.IN, pull=pyb.Pin.PULL_DOWN)
 
 # This will loop forever, checking the button every 100ms
 while (True):
