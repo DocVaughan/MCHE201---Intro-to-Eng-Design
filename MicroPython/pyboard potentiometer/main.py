@@ -21,7 +21,7 @@ import pyb      # import the pyboard module
 import time     # import the time module
 
 # Set up the analog-to-digital converter
-adc = pyb.ADC(pyb.Pin('X22'))
+adc = pyb.ADC(pyb.Pin("X22"))
 
 # Now read the pot every 500ms, forever
 while (True):
