@@ -33,7 +33,7 @@ try:
 
         # Sleep 1s
         time.sleep(1)
-        
+    
         # increment the counter by 1
         counter = counter + 1
 
