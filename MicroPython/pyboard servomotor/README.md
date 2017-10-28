@@ -8,7 +8,11 @@ pyb.Servo(2)  | X2          | X4
 pyb.Servo(3)  | X3          | X1  
 pyb.Servo(4)  | X4          | X2  
 
-Code adapted from: 
+The configurations to run this script without modification for the pyboard and pyboard LITE are shown below.
+
+![Servo Hardware Setup](servoSetupComparison.png)
+
+This code is adapted from that at: 
  http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/servo.html
 
 
