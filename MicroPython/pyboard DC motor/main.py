@@ -13,8 +13,6 @@
 #  The circuit on the shield is identical to the Feather board shown in that
 #  tutorial.
 #
-# The motors in the MCHE 201 kits have 200 steps/rev.
-#  https://www.adafruit.com/product/324
 #
 # Created: 10/20/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
