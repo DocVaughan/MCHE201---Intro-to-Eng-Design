@@ -46,7 +46,7 @@ motors = motor.DCMotors(i2c)
 # Now, we can initialize the DC motor object. The number should match the
 # motor number = (number on the motor driver board - 1)
 # For example, M1 on the board is motor 0, M2 on the board is motor 1, etc
-MOTOR_NUMBER = 2 # DC motor M1
+MOTOR_NUMBER = 0 # DC motor M1
 
 try:
     # To control the motor, give it a speed between -4095 and 4095
