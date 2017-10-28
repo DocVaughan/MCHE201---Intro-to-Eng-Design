@@ -3,4 +3,4 @@ its value to the REPL. The sensor is connected to the pin X22 on the pyboard and
 
 The hardware setup is shown below.
 
-![Flex Sensor Hardware Setup](pyboard_breadboard_FlexSensor_cropped_.png)
+![Flex Sensor Hardware Setup](pyboard_breadboard_FlexSensor_cropped.png)
