@@ -4,6 +4,13 @@
 # Script to play some tunes using the piezo buzzer. Connect one size of the 
 # buzzer to Y2 and the other lead to ground.
 #
+# On the pyboard, pin Y2 is connected to the 2nd channel of Timer 8
+# On the pyboard LITE, pin Y2 is connected to the 2nd channel of Timer 3
+#
+# This means that the pin setup of this code will be slightly different based
+# on the version board that you have.
+#
+#
 # Code adapted from that at: http://wiki.micropython.org/Play-Tone
 #
 # Created: 10/05/17
@@ -111,10 +118,25 @@ CS8 = 4435
 D8  = 4699
 DS8 = 4978
 
-# set up pin PWM timer for output to the buzzer
+
+# ----- Set up pin PWM timer for output to the buzzer ------------------------
+# 
+# Within this block of code, only uncomment the 3 lines corresponding to the 
+# version of the pyboard that you are using.
+#
+# This setup is for the pyboard. For the pyboard LITE, comment out these lines
+# and uncomment those in the next block.
 p2 = pyb.Pin("Y2") # Pin Y2 with timer 8 Channel 2
 tim = pyb.Timer(8, freq=3000)
 ch = tim.channel(2, pyb.Timer.PWM, pin=p2)
+
+# This setup is for the pyboard LITE. For the pyboard, comment out the lines
+# below and uncomment those in the previous block.
+# p2 = pyb.Pin("Y2") # Pin Y2 with timer 3 Channel 2
+# tim = pyb.Timer(3, freq=3000)
+# ch = tim.channel(2, pyb.Timer.PWM, pin=p2)
+#
+# ----- End of set up pin PWM timer for output to the buzzer ------------------
 
 # define a list of the tones defined above
 note = [B0, C1, CS1, D1, DS1, E1, F1, FS1, G1, GS1, A1, AS1, B1, C2, CS2, D2, DS2, E2, F2, FS2, G2, GS2, A2, AS2, B2, C3, CS3, D3, DS3, E3, F3, FS3, G3, GS3, A3, AS3, B3, C4, CS4, D4, DS4, E4, F4, FS4, G4, GS4, A4, AS4, B4, C5, CS5, D5, DS5, E5, F5, FS5, G5, GS5, A5, AS5, B5, C6, CS6, D6, DS6, E6, F6, FS6, G6, GS6, A6, AS6, B6, C7, CS7, D7, DS7, E7, F7, FS7, G7, GS7, A7, AS7, B7, C8, CS8, D8, DS8]
