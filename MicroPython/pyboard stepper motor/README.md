@@ -11,4 +11,4 @@ The [motors in the MCHE 201 kits](https://www.adafruit.com/product/324) have 200
 
 The hardware configuration to run this script without modification is shown below:
 
-![Stepper Motor Hardware Configuration](pyboard_breadboard_motorShield_stepperMotor)
+![Stepper Motor Hardware Configuration](pyboard_breadboard_motorShield_stepperMotor.png)
