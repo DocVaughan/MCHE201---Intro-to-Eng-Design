@@ -1,7 +1,9 @@
 ###############################################################################
 # main.py
 #
-# Script to run a servo motor connected to pin X1
+# Script to run a servo motor connected to the pyb.Servo(1) pin on the board
+# See note in script for what physical pin this corresponds to on the version
+# of the pyboard that you have.
 #
 # Code adapted from: 
 #  http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/servo.html
@@ -12,7 +14,8 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 10/28/17 - JEV - joshua.vaughan@louisiana.edu
+#       - Added note about the differing pinout on the pyboard LITE
 #
 # TODO:
 #   * 
@@ -21,9 +24,16 @@
 import pyb  # import the pyboard module
 import time # import the time module
 
-# Define the servo object. 
-# Servo 1 is connected to X1, Servo 2 to X2, Servo 3 to X3, and Servo 2 to X4
-# Here, we'll use the first position
+# Define the servo object. The numbering scheme differs between the pyboard and
+# the pyboard LITE.
+# 
+# For the pyboard:
+#  Servo 1 is connected to X1, Servo 2 to X2, Servo 3 to X3, and Servo 2 to X4
+#
+# For the pyboard LITE:
+#  Servo 1 is connected to X3, Servo 2 to X4, Servo 3 to X1, and Servo 2 to X2
+
+# Here, we'll use the first position on the pyboard
 servo1 = pyb.Servo(1)
 
 # Now, we can control the angle of the servo
