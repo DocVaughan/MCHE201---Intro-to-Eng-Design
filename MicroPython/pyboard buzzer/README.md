@@ -27,4 +27,8 @@ ch = tim.channel(2, pyb.Timer.PWM, pin=p2)
 # ----- End of set up pin PWM timer for output to the buzzer ------------------
 ```
 
+The hardware setup to use this script is shown below.
+
+![The Buzzer Hardware Setup](https://github.com/DocVaughan/MCHE201---Intro-to-Eng-Design/blob/Fall-2017/MicroPython/pyboard%20buzzer/pyboard_breadboard_buzzer.png)
+
 Code adapted from that at: http://wiki.micropython.org/Play-Tone
