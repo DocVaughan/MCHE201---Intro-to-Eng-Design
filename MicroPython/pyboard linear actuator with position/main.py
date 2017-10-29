@@ -9,7 +9,8 @@
 # board.
 #
 # It also a potentiometer that can give us information about the position of 
-# the actuator. This script does not utilize that information.
+# the actuator. This script reads the value of the potentiometer, but does
+# not do any mapping of is value to the length of the actuator.
 #
 # The linear actuators in the MCHE 201 kits are:
 #  https://www.servocity.com/hda4-2
@@ -23,7 +24,7 @@
 #  The circuit on the shield is identical to the Feather board shown in that
 #  tutorial.
 #
-# Created: 10/23/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+# Created: 10/29/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
 #   * mm/dd/yy - Name (email if not same person as above)
@@ -55,7 +56,11 @@ motors = motor.DCMotors(i2c)
 # Now, we can initialize the DC motor object. The number should match the
 # motor number = (number on the motor driver board - 1)
 # For example, M1 on the board is motor 0, M2 on the board is motor 1, etc
-MOTOR_NUMBER = 2 # DC motor M1
+MOTOR_NUMBER = 0 # M1
+
+# Set up the analog-to-digital converter to read the linear actuator 
+# potentiometer that gives us information on its current length
+linear_adc = pyb.ADC(pyb.Pin("X22"))
 
 try:
     # To control the actuator, give it a speed between -4095 and 4095
@@ -75,14 +80,42 @@ try:
     motors.speed(MOTOR_NUMBER, 0)
     time.sleep_ms(10) # pause briefly to let the motor stop
 
-
+    # Move the actuator in one direction, ramping up to 1/2 speed
     for speed in range(2048):
         motors.speed(MOTOR_NUMBER, speed)
+        
+        # Read the potentiometer of the linear actuator and print out its value
+        # We're not attempting to map this to a length
+        linear_pot = linear_adc.read()
+        print("Linear ADC: {}".format(linear_pot))
+        
+        # Sleep 1ms during each loop
         time.sleep_ms(1)
 
-    for speed in range(2048):
+    # Stop the actuator, then move it in the opposite direction, 
+    # ramping up to 1/2 speed in that direction
+    for speed in range(4095):
         motors.speed(MOTOR_NUMBER, 2048 - speed)
+        
+        # Read the potentiometer of the linear actuator and print out its value
+        # We're not attempting to map this to a length
+        linear_pot = linear_adc.read()
+        print("Linear ADC: {}".format(linear_pot))
+        
+        # Sleep 1ms during each loop
+        time.sleep_ms(1)
+        
+    # Ramp down from 1/2 speed to zero speed
+    for speed in range(2048):
+        motors.speed(MOTOR_NUMBER, -2048 + speed)
+        
+        # Read the potentiometer of the linear actuator and print out its value
+        # We're not attempting to map this to a length
+        linear_pot = linear_adc.read()
+        print("Linear ADC: {}".format(linear_pot))
+        
+        # Sleep 1ms during each loop
         time.sleep_ms(1)
 
-except:
+except: # If any error occurs, then stop the motors
     motors.speed(MOTOR_NUMBER, 0)
