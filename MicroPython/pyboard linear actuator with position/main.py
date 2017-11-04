@@ -9,8 +9,8 @@
 # board.
 #
 # It also a potentiometer that can give us information about the position of 
-# the actuator. This script reads the value of the potentiometer, but does
-# not do any mapping of is value to the length of the actuator.
+# the actuator. This script reads the value of the potentiometer, then 
+# estimates the length of the actuator from this value.
 #
 # The linear actuators in the MCHE 201 kits are:
 #  https://www.servocity.com/hda4-2
@@ -62,32 +62,48 @@ MOTOR_NUMBER = 0 # M1
 # potentiometer that gives us information on its current length
 linear_adc = pyb.ADC(pyb.Pin("X22"))
 
+# We'll also define some constants for use in this code
+# Change these two values to match those at the limits of your actuator.
+ACT_MAX_ADC = 185  # ADC value at actuator maximum length
+ACT_MIN_ADC = 4065 # ADC value at actuator minimum length
+ACT_MAX_LEN = 3.93 # maximum stroke length (in)
+ACT_MIN_LEN = 0.0  # minimum stroke length (in)
+
+# We'll now define a function that will convert a ADC value to actuator length
+def calculate_length(adc_value):
+    """ 
+    This function uses a simple linear interpolation (y=mx+b) to estimate
+    the current length of the linear actuator. It assumes a 4-inch stroke, like 
+    those used in the MCHE201 kits
+    
+    Arguments:
+      adc_value : the adc value (0-4095) to calculate the length for
+      
+    Returns:
+      length : the calculated length
+    """
+    
+    # calculate the slope and y-intercept for the linear fit
+    slope = (ACT_MAX_LEN - ACT_MIN_LEN) / (ACT_MAX_ADC - ACT_MIN_ADC)
+    intercept = ACT_MIN_LEN - slope * ACT_MIN_ADC
+    
+    # Now, calculate the length for the current ADC value
+    length = slope * adc_value + intercept
+    return length
+
+# Now we'll run the main part of the script, which moves the actuator around,
+# while printing out the current ADC value and calculated length
 try:
-    # To control the actuator, give it a speed between -4095 and 4095
-    motors.speed(MOTOR_NUMBER, 2048)    # Go ~1/2 speed in one direction
-    time.sleep(1)                       # Continue at this speed for 1s
-
-    # ALWAYS STOP THE actuator BEFORE SWITCHING DIRECTIONS!!!!
-    # To stop, issue a speed of 0
-    motors.speed(MOTOR_NUMBER, 0)
-    time.sleep(1) # pause briefly to let the motor stop - 1s here
-
-    # To move the actuator in the opposite direction, give a negative speed
-    motors.speed(MOTOR_NUMBER, -2048)   # Go ~1/2 speed in the other direction
-    time.sleep(1)                       # Continue at this speed for 1s
-
-    # To stop, issue a speed of 0
-    motors.speed(MOTOR_NUMBER, 0)
-    time.sleep_ms(10) # pause briefly to let the motor stop
-
     # Move the actuator in one direction, ramping up to 1/2 speed
     for speed in range(2048):
         motors.speed(MOTOR_NUMBER, speed)
         
         # Read the potentiometer of the linear actuator and print out its value
-        # We're not attempting to map this to a length
         linear_pot = linear_adc.read()
         print("Linear ADC: {}".format(linear_pot))
+        
+        linear_length = calculate_length(linear_pot)
+        print("Length:     {:.2f}in".format(linear_length))
         
         # Sleep 1ms during each loop
         time.sleep_ms(1)
@@ -98,9 +114,11 @@ try:
         motors.speed(MOTOR_NUMBER, 2048 - speed)
         
         # Read the potentiometer of the linear actuator and print out its value
-        # We're not attempting to map this to a length
         linear_pot = linear_adc.read()
         print("Linear ADC: {}".format(linear_pot))
+        
+        linear_length = calculate_length(linear_pot)
+        print("Length:     {:.2f}in".format(linear_length))
         
         # Sleep 1ms during each loop
         time.sleep_ms(1)
@@ -110,9 +128,11 @@ try:
         motors.speed(MOTOR_NUMBER, -2048 + speed)
         
         # Read the potentiometer of the linear actuator and print out its value
-        # We're not attempting to map this to a length
         linear_pot = linear_adc.read()
         print("Linear ADC: {}".format(linear_pot))
+        
+        linear_length = calculate_length(linear_pot)
+        print("Length:     {:.2f}in\n".format(linear_length))
         
         # Sleep 1ms during each loop
         time.sleep_ms(1)
