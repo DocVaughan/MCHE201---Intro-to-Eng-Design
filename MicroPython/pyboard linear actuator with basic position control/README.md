@@ -1,4 +1,3 @@
-***NOTE: As of 10/28/17, this script is not complete.***
 Script to demonstrate the using the potentiometer of the linear actuator in a feedback controller on its length. We use a simple on/off controller based on a deadzone around the desired length. The pyboard connected over i2c to a Adafruit Motor Driver Shield. 
 
 The linear actuator actually has a DC motor inside, so we control it using the same commands that we would issue to a DC motor connected to the board. It also a potentiometer that can give us information about the position of the actuator. Its value will be near Vcc (3.3VDC in this case) when fully retracted and near 0VDC when fully extended. You should test your linear actuator to determine the ADC values corresponding to its limits. They will vary slightly, so you may need to change the values of `ACT_MAX_ADC` and `ACT_MIN_ADC` to reflect those at the maximum and minimum lengths of the actuator you have. 
