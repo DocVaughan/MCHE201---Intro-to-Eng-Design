@@ -81,12 +81,12 @@ linear_adc = pyb.ADC(pyb.Pin("X22"))
 
 # We'll also define some constants for use in this code
 # Change these two values to match those at the limits of your actuator.
-ACT_MAX_ADC = 350
-ACT_MIN_ADC = 3900
+ACT_MAX_ADC = 185  # ADC value at actuator maximum length
+ACT_MIN_ADC = 4065 # ADC value at actuator minimum length
 
 # These should be the same for all actuators in the MCHE201 kit
-ACT_MAX_LEN = 3.93 # maximum stroke length 
-ACT_MIN_LEN = 0.0
+ACT_MAX_LEN = 3.93 # maximum stroke length (in)
+ACT_MIN_LEN = 0.0  # minimum stroke length (in)
 
 # This is the tolerance in our position control algorithm. If we are within
 # this +/- of this distance of the desired length, we consider ourselves at 
@@ -159,19 +159,22 @@ try:
     # Now, we can start the actuator at 1/2 speed toward the desired length
     motors.speed(MOTOR_NUMBER, int(length_dir)*2048)
     
-    # Then, keep moving while we are outside of the tolerable bounds around desired, move at 
+    # Then, keep moving while we are outside of the tolerable bounds around desired 
     while (linear_length > max_tolerable_length) or (linear_length < min_tolerable_length): 
-        # Measure the length again and calculate current error
+        # Measure the length again
         linear_pot = linear_adc.read()
         linear_length = calculate_length(linear_pot)
-        print("Current Length:  {:>8.4f}in".format(linear_length))
-        print("Length Error:    {:>8.4f}in\n".format(length_error))
+
         # Calculate the error
         length_error = desired_length - linear_length
 
         # Get the sign of the error for direction
         length_dir = copysign(1, length_error)
-
+        
+        # Print the current status
+        print("Current Length:  {:>8.4f}in".format(linear_length))
+        print("Length Error:    {:>8.4f}in\n".format(length_error))
+        
         time.sleep_ms(1) # sleep 1ms
 
     # When the while loop breaks, we should be within our tolerable bounds
