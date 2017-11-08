@@ -110,9 +110,14 @@ class motor(object):
 
     def soft_stop(self):
         """ Method to soft stop (coast to stop) an individual motor"""
-        for i in range(self.currentSpeed):
-            self.ch.pulse_width_percent(self.currentSpeed-i)
-            time.sleep(0.01)
+        if self.currentSpeed > 0:
+            for i in range(self.currentSpeed):
+                self.ch.pulse_width_percent(self.currentSpeed-i)
+                time.sleep(0.01)
+        elif self.currentSpeed < 0:
+            for i in range(-self.currentSpeed):
+                self.ch.pulse_width_percent(self.currentSpeed+i)
+                time.sleep(0.01)
         
         self.ch.pulse_width_percent(0)
 

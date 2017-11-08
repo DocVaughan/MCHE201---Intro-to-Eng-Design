@@ -26,13 +26,13 @@ import time # import the time module
 
 # We need to set up two digital outputs that we will use to control the 
 # direction of the motor.
-A1_pin = pyb.Pin('X8', pyb.Pin.OUT_PP, pull=pyb.Pin.PULL_DOWN)
-A2_pin = pyb.Pin('X7', pyb.Pin.OUT_PP, pull=pyb.Pin.PULL_DOWN)
+A1_pin = pyb.Pin("X8", pyb.Pin.OUT_PP, pull=pyb.Pin.PULL_DOWN)
+A2_pin = pyb.Pin("X7", pyb.Pin.OUT_PP, pull=pyb.Pin.PULL_DOWN)
 
 # We also need to set up a third pin to control the speed of the motor. This 
 # output needs to have PWM capabilities, so it should be connected to a pin
 # that has an associated timer on the pyboard
-PWM_pin = pyb.Pin('X6')
+PWM_pin = pyb.Pin("X6")
 PWM_TIMER = pyb.Timer(2, freq=20000)
 PWM_CHANNEL = PWM_TIMER.channel(1, pyb.Timer.PWM, pin=PWM_pin)
 
