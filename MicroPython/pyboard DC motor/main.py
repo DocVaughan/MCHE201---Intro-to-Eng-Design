@@ -17,11 +17,9 @@
 # Created: 10/20/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
-#     - major change 2
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
+#   * 11/08/17 - JEV - joshua.vaughan@louisiana.edu
+#     - added print statements for REPL status of movements
+#     - added raise to exception to push through what error caused the problem
 #
 # TODO:
 #   * mm/dd/yy - Major bug to fix
@@ -50,23 +48,27 @@ MOTOR_NUMBER = 0 # DC motor M1
 
 try:
     # To control the motor, give it a speed between -4095 and 4095
+    print("Moving 1/2 speed in one direction.")
     motors.speed(MOTOR_NUMBER, 2048)    # Go ~1/2 speed in one direction
     time.sleep(1)                       # Continue at this speed for 1s
 
     # ALWAYS STOP THE MOTOR BEFORE SWITCHING DIRECTIONS!!!!
     # To stop, issue a speed of 0
+    print("Stopping.")
     motors.speed(MOTOR_NUMBER, 0)
     time.sleep(1) # pause briefly to let the motor stop - 1s here
 
     # To turn the motor in the opposite direction, give a negative speed
+    print("Moving 1/2 speed in the other direction.")
     motors.speed(MOTOR_NUMBER, -2048)   # Go ~1/2 speed in the other direction
     time.sleep(1)                       # Continue at this speed for 1s
 
     # To stop, issue a speed of 0
+    print("Stopping.")
     motors.speed(MOTOR_NUMBER, 0)
     time.sleep_ms(10) # pause briefly to let the motor stop
 
-
+    print("Varying speed from 0 to half-speed, then back to zero.")
     for speed in range(2048):
         motors.speed(MOTOR_NUMBER, speed)
         time.sleep_ms(1)
@@ -76,4 +78,9 @@ try:
         time.sleep_ms(1)
 
 except:
+    print("Error. Stopping motors.")
     motors.speed(MOTOR_NUMBER, 0)
+    
+    # If we call raise here, we'll still get the information on why the 
+    # exception was raise in the first place. Without this, we do not.
+    raise 

@@ -27,11 +27,8 @@
 # Created: 10/29/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
-#     - major change 2
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
+#   * 11/08/17 - JEV - joshua.vaughan@louisiana.edu
+#     - added raise to exception to push through what error caused the problem
 #
 # TODO:
 #   * mm/dd/yy - Major bug to fix
@@ -137,5 +134,10 @@ try:
         # Sleep 1ms during each loop
         time.sleep_ms(1)
 
-except: # If any error occurs, then stop the motors
+except: # If any error occurs, then stop
+    print("Some error occured. Stopping.")
     motors.speed(MOTOR_NUMBER, 0)
+    
+    # If we call raise here, we'll still get the information on why the 
+    # exception was raise in the first place. Without this, we do not.
+    raise 

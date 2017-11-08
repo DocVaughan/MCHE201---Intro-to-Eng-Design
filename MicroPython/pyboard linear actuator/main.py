@@ -26,11 +26,9 @@
 # Created: 10/23/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
-#     - major change 2
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
+#   * 11/08/17 - JEV - joshua.vaughan@louisiana.edu
+#     - added print statements for REPL status of movements
+#     - added raise to exception to push through what error caused the problem
 #
 # TODO:
 #   * mm/dd/yy - Major bug to fix
@@ -59,37 +57,49 @@ MOTOR_NUMBER = 0 # DC motor M1
 
 try:
     # To control the actuator, give it a speed between -4095 and 4095
+    print("Moving at 1/2 speed in one direction")
     motors.speed(MOTOR_NUMBER, 2048)    # Go ~1/2 speed in one direction
     time.sleep(1)                       # Continue at this speed for 1s
 
     # ALWAYS STOP THE actuator BEFORE SWITCHING DIRECTIONS!!!!
     # To stop, issue a speed of 0
+    print("Stopping.")
     motors.speed(MOTOR_NUMBER, 0)
     time.sleep(1) # pause briefly to let the motor stop - 1s here
 
     # To move the actuator in the opposite direction, give a negative speed
+    print("Moving at 1/2 speed in the other direction")
     motors.speed(MOTOR_NUMBER, -2048)   # Go ~1/2 speed in the other direction
     time.sleep(1)                       # Continue at this speed for 1s
 
     # To stop, issue a speed of 0
+    print("Stopping.")
     motors.speed(MOTOR_NUMBER, 0)
     time.sleep_ms(10) # pause briefly to let the motor stop
 
     # Move the actuator in one direction, ramping up to 1/2 speed
+    print("Rampign up to 1/2 speed in one direction.")
     for speed in range(2048):
         motors.speed(MOTOR_NUMBER, speed)
         time.sleep_ms(1)
 
+    print("Ramping throuhg to 1/2 speed in the other direction.")
     # Stop the actuator, then move it in the opposite direction, 
     # ramping up to 1/2 speed
     for speed in range(4095):
         motors.speed(MOTOR_NUMBER, 2048 - speed)
         time.sleep_ms(1)
-        
+    
+    print("Rampign down to zero speed.")
     # Ramp down from 1/2 speed to zero speed
     for speed in range(2048):
         motors.speed(MOTOR_NUMBER, -2048 + speed)
         time.sleep_ms(1)
 
 except:
+    print("Some problem occured. Stopping the actuator.")
     motors.speed(MOTOR_NUMBER, 0)
+    
+    # If we call raise here, we'll still get the information on why the 
+    # exception was raise in the first place. Without this, we do not.
+    raise 

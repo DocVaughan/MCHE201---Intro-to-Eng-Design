@@ -3,16 +3,14 @@
 #
 # Simple script demonstrating trial... except concept
 #
-# Optional Link to relevant documentation
+# The use here closely mirrors that explained at:
+#  https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions
 #
 # Created: 10/26/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
-#     - major change 2
-#   * mm/dd/yy - Name (email if not same person as above)
-#     - major change 1
+#   * 11/08/17 - JEV - joshua.vaughan@louisiana.edu
+#     - added raise to exception to push through what error caused the problem
 #
 # TODO:
 #   * mm/dd/yy - Major bug to fix
@@ -41,6 +39,10 @@ try:
 # which this except will "catch"
 except:
     print("Not so smooth any more.")
+    
+    # If we call raise here, we'll still get the information on why the 
+    # exception was raise in the first place. Without this, we do not.
+    raise 
     
 # This block will always run, whether the try finishes or if an exception occurs
 finally:

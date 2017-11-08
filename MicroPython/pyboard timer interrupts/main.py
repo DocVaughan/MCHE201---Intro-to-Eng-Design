@@ -5,12 +5,14 @@
 #
 # Script demonstrating using the timer-based interrupts on the the pyboard
 #
-# These provide a way to trigger a command after a set amount of time without requiring 
-# a timer.sleep() type function which would prohibit us from doing other things. In this 
-# example, we'll just set up a couple timers to trigger at intervals, then enter a loop
-# printing a counter. Their trigger should be inserted into the print statements. 
+# These provide a way to trigger a command after a set amount of time without 
+# requiring a timer.sleep() type function which would prohibit us from doing 
+# other things. In this example, we'll just set up a couple timers to trigger 
+# at intervals, then enter a loop printing a counter. Their trigger should be 
+# inserted into the print statements. 
 #
-# A similar construct could be used to set a motor after a set amount of time running, etc
+# A similar construct could be used to set a motor after a set amount of time 
+# running, etc
 #
 # For more information on the timers:
 #    http://docs.micropython.org/en/latest/pyboard/tutorial/timer.html
