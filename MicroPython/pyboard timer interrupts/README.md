@@ -8,5 +8,5 @@ For more information on the timers in MicroPython see:
    http://docs.micropython.org/en/latest/pyboard/tutorial/timer.html
    
 For more information on interrupts and interrupt handlers in MicroPython see:
-    * http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/switch.html#technical-details-of-interrupts
-    * http://docs.micropython.org/en/latest/pyboard/reference/isr_rules.html#isr-rules
+* http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/switch.html#technical-details-of-interrupts
+* http://docs.micropython.org/en/latest/pyboard/reference/isr_rules.html#isr-rules
