@@ -89,7 +89,7 @@ for index in range(200):
     stepper0.onestep(stepper.FORWARD, stepper.SINGLE)
     
     # Pause 1ms (0.001s) between each step
-    # This means the motor will take about 2seconds to make a full revolution.
+    # This means the motor will take about 0.2seconds to make a full revolution.
     time.sleep_ms(1) 
 
 # Now that the loop has ended, we get the time again, then compare it to the
