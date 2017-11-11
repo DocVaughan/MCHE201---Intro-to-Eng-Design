@@ -9,8 +9,9 @@ where `0 < alpha < 1`. For larger values of `alpha` past inputs are valued more,
 
 ` alpha = 1 - 2 / (N+1) `
 
-For more information on the Exponential Moving Average (EMA), see:
- https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average
+For more information on the [Exponential Moving Average (EMA) wikipedia page](https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average).
+ 
+*Note:* The `alpha` in the Wikipedia entry is actually the `(1-alpha)` term of the formulation shown here.
 
 This code requires the .mpy files from the [Adafruit repository](https://github.com/adafruit/micropython-adafruit-pca9685) to be on the pyboard.
  
