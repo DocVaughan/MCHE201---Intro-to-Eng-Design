@@ -32,7 +32,8 @@
 import pyb  # import the pyboard module
 import time # import the time module (remove if not using)
 
-# We'll use the machine i2c implementation. It's what the Adafruit library expects
+# We'll use the machine i2c implementation. 
+# It's what the Adafruit library expects
 import machine 
 
 # We also need to import the DC motor code from the library
@@ -47,7 +48,7 @@ motors = motor.DCMotors(i2c)
 # Now, we can initialize the DC motor object. The number should match the
 # motor number = (number on the motor driver board - 1)
 # For example, M1 on the board is motor 0, M2 on the board is motor 1, etc
-MOTOR_NUMBER = 0 # DC motor M0
+MOTOR_NUMBER = 0 # DC motor M1
 
 # We'll define a variable to hold a running average of our prior speed commands
 last_speed = 0
@@ -91,7 +92,7 @@ try:
         # For more information see: 
         #  https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average
         speed = alpha * last_speed + beta * desired_speed
-        last_speed = speed
+        last_speed = speed # Save the current speed for use in the next loop
         
         # printing this should clear the REPL
         # We can fake a screen where only the values update
