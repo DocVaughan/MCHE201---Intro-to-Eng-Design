@@ -6,6 +6,7 @@ It has been tested with:
  * [WiiChuck adapter](https://www.dfrobot.com/product-91.html)
 
 The hardware connctions between the pyboard and the Wii Nunchucky board are:
+
 **pyboard**    | **Nunchucky*
 -------------- | ---------
 Y9 - scl       | Clk
