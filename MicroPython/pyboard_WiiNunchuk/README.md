@@ -7,7 +7,7 @@ It has been tested with:
 
 The hardware connctions between the pyboard and the Wii Nunchucky board are:
 
-**pyboard**    | **Nunchucky*
+**pyboard**    | **Nunchucky**
 -------------- | ---------
 Y9 - scl       | Clk
 Y10 - sda      | Data
