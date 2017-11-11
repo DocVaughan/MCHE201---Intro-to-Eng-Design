@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # main.py
 #
-# script to demonstrate the basic functionality of a stepper motor using the
+# script to demonstrate the basic functionality of a DC motor using the
 # pyboard connected over i2c to a Adafruit Motor Driver Shield
 #
 # This code requires the .mpy files from the repository linked below to be
