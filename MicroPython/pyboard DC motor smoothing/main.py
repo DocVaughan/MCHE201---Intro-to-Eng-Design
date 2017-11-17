@@ -111,5 +111,5 @@ except:
     motors.speed(MOTOR_NUMBER, 0)
     
     # If we call raise here, we'll still get the information on why the 
-    # exception was raise in the first place. Without this, we do not.
+    # exception was raised in the first place. Without this, we do not.
     raise 

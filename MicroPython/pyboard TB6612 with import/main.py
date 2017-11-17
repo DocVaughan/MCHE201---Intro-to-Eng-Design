@@ -75,7 +75,11 @@ try:
         motorA.stop()
         time.sleep_ms(100)         # Sleep briefly to let the motor stop
 
-finally:
+except:
     print("Some Error Occurred. Stopping motor.")
     # To stop the motor, we should set the duty cycle to 0
     motorA.stop()
+    
+    # If we call raise here, we'll still get the information on why the 
+    # exception was raised in the first place. Without this, we do not.
+    raise 

@@ -73,7 +73,12 @@ try:
         # To stop the motor, we should set the duty cycle to 0
         PWM_CHANNEL.pulse_width_percent(0)
         time.sleep_ms(100)         # Sleep briefly to let the motor stop
-finally:
+
+except:
     print("Some Error Occurred. Stopping motor.")
     # To stop the motor, we should set the duty cycle to 0
     PWM_CHANNEL.pulse_width_percent(0)
+    
+    # If we call raise here, we'll still get the information on why the 
+    # exception was raised in the first place. Without this, we do not.
+    raise 

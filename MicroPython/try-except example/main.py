@@ -41,7 +41,7 @@ except:
     print("Not so smooth any more.")
     
     # If we call raise here, we'll still get the information on why the 
-    # exception was raise in the first place. Without this, we do not.
+    # exception was raised in the first place. Without this, we do not.
     raise 
     
 # This block will always run, whether the try finishes or if an exception occurs

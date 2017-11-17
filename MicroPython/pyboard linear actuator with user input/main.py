@@ -1,10 +1,11 @@
 # -----------------------------------------------------------------------------
 # main.py
 #
-# Script to demonstrate the using the potentiometer of the linear actuator in 
-# a feedback controller on its length. We use a simple on/off controller based
-# on a deadzone around the desired length. The pyboard connected over i2c to a 
-# Adafruit Motor Driver Shield.
+# Script to demonstrate the taking user input on the desired length of the
+# linear actuator, then using its potentiometer in a feedback controller 
+# on its length. We use a simple on/off controller based on a deadzone around 
+# the desired length. The pyboard connected over i2c to a Adafruit Motor 
+# Driver Shield.
 #
 # The linear actuator actually has a DC motor inside, so we control it 
 # using the same commands that we would issue to a DC motor connected to the
@@ -37,7 +38,7 @@
 #  The circuit on the shield is identical to the Feather board shown in that
 #  tutorial.
 #
-# Created: 11/04/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+# Created: 11/17/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
 #   * mm/dd/yy - Name (email if not same person as above)
@@ -122,66 +123,76 @@ def calculate_length(adc_value):
 # 
 # Note: This would be better done in a function if within a larger script.
 try:
-    # Read the potentiometer of the linear actuator, calculate initial length,
-    # then print out its value
-    linear_pot = linear_adc.read()
-    linear_length = calculate_length(linear_pot)
-    print("Starting Length:    {:.2f}in".format(linear_length))
-
-    # Let's move the actuator to near the middle of its stroke
-    desired_length = 2.0 # desired length (in) <- Using inches to match actuator specs
-    
-    # The simplest way to use the feedback is to just start moving toward the
-    # desired length, then repeatedly check the length of the actuator. Once
-    # it is within some tolerable bounds of the length, stop it. To do this, 
-    # we...
-    
-    # Check that the desired length is within the bounds of the actuator
-    if desired_length > ACT_MAX_LEN:
-        desired_length = ACT_MAX_LEN - LENGTH_TOLERANCE
-        print("The actuator is not that long.")
-        print("Moving to maximum length of {:.2f}in instead.".format(desired_length))
-    elif desired_length < ACT_MIN_LEN:
-        desired_length = ACT_MIN_LEN + LENGTH_TOLERANCE
-        print("The actuator cannot be that short.")
-        print("Moving to minimum length of {:.2f}in instead.".format(desired_length))
-
-    # Define the tolerable lengths around the desired values
-    max_tolerable_length = desired_length + LENGTH_TOLERANCE
-    min_tolerable_length = desired_length - LENGTH_TOLERANCE
-    
-    # Calculate the initial error
-    length_error = desired_length - linear_length
-    
-    # Get the sign of the initial error. Used to set direction of motion.
-    length_dir = copysign(1, length_error) 
-
-    # Now, we can start the actuator at 1/2 speed toward the desired length
-    motors.speed(MOTOR_NUMBER, int(length_dir)*2048)
-    
-    # Then, keep moving while we are outside of the tolerable bounds around desired 
-    while (linear_length > max_tolerable_length) or (linear_length < min_tolerable_length): 
-        # Measure the length again
+    while(True):
+        # Read the potentiometer of the linear actuator, calculate initial length,
+        # then print out its value
         linear_pot = linear_adc.read()
         linear_length = calculate_length(linear_pot)
+        print("Current Length:    {:.2f}in".format(linear_length))
 
-        # Calculate the error
+        # Now, we'll ask the user for their input
+        print("Enter the desired stroke-length in inches, then press return:")
+        desired_length_input = input()
+
+        try:
+            # convert to an integer desired length (in) <- Using inches to match actuator specs
+            desired_length = float(desired_length_input) 
+        except ValueError:
+            print("Please enter a valid number.")
+            print("Remaining at current length.")
+            desired_length = linear_length
+    
+        # The simplest way to use the feedback is to just start moving toward the
+        # desired length, then repeatedly check the length of the actuator. Once
+        # it is within some tolerable bounds of the length, stop it. To do this, 
+        # we...
+    
+        # Check that the desired length is within the bounds of the actuator
+        if desired_length > ACT_MAX_LEN:
+            desired_length = ACT_MAX_LEN - LENGTH_TOLERANCE
+            print("The actuator is not that long.")
+            print("Moving to maximum length of {:.2f}in instead.".format(desired_length))
+        elif desired_length < ACT_MIN_LEN:
+            desired_length = ACT_MIN_LEN + LENGTH_TOLERANCE
+            print("The actuator cannot be that short.")
+            print("Moving to minimum length of {:.2f}in instead.".format(desired_length))
+
+        # Define the tolerable lengths around the desired values
+        max_tolerable_length = desired_length + LENGTH_TOLERANCE
+        min_tolerable_length = desired_length - LENGTH_TOLERANCE
+    
+        # Calculate the initial error
         length_error = desired_length - linear_length
+    
+        # Get the sign of the initial error. Used to set direction of motion.
+        length_dir = copysign(1, length_error) 
 
-        # Get the sign of the error for direction
-        length_dir = copysign(1, length_error)
-        
-        # Print the current status
-        print("Current Length:  {:>8.4f}in".format(linear_length))
-        print("Length Error:    {:>8.4f}in\n".format(length_error))
-        
-        time.sleep_ms(1) # sleep 1ms
+        # Now, we can start the actuator at 1/2 speed toward the desired length
+        motors.speed(MOTOR_NUMBER, int(length_dir)*2048)
+    
+        # Then, keep moving while we are outside of the tolerable bounds around desired 
+        while (linear_length > max_tolerable_length) or (linear_length < min_tolerable_length): 
+            # Measure the length again
+            linear_pot = linear_adc.read()
+            linear_length = calculate_length(linear_pot)
 
-    # When the while loop breaks, we should be within our tolerable bounds
-    # around the desired length. So, we stop the motor and report the final 
-    # position
-    motors.speed(MOTOR_NUMBER, 0)
-    print("\nStopped at {:.4f}in for a desired length of {:.2f}in.\n\n".format(linear_length, desired_length))
+            # Calculate the error
+            length_error = desired_length - linear_length
+
+            # Get the sign of the error for direction
+            length_dir = copysign(1, length_error)
+        
+            # Print the current status
+            print("Current Length:  {:>8.4f}in".format(linear_length))
+            print("Length Error:    {:>8.4f}in\n".format(length_error))
+        
+            time.sleep_ms(1) # sleep 1ms
+
+        # When the while loop breaks, we should be within our tolerable bounds
+        # around the desired length. So, we stop the motor and report the final 
+        # position
+        motors.speed(MOTOR_NUMBER, 0)
+        print("\nStopped at {:.4f}in for a desired length of {:.2f}in.\n\n".format(linear_length, desired_length))
 
 except:
     print("Error. Stopping motors.")
