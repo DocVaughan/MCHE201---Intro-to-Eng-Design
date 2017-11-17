@@ -117,7 +117,8 @@ def calculate_length(adc_value):
     return length
 
 
-# Now we'll run the main part of the script, which moves the actuator to a 
+# Now we'll run the main part of the script, which ask the user for an input, 
+# processes it, checking its validity, then moves the actuator to the resulting
 # desired length, using the actuator potentiometer for feedback on a simple
 # on/off controller.
 # 
