@@ -41,7 +41,7 @@ servo1 = pyb.Servo(1)
 SERVO_MAX_ANGLE = 75
 SERVO_MIN_ANGLE = -75
 
-# Now we'll run the main part of the script, which ask the user for an input, 
+# Now we'll run the main part of the script, which asks the user for an input, 
 # processes it, checking its validity, then moves the servo to the resulting
 # desired angle.
 
@@ -77,6 +77,8 @@ while(True):
         print("Moving to minimum angle of {:+2d}deg instead.\n".format(desired_angle))
     else:
         print("Moving to desired angle of {:+2d}deg.\n".format(desired_angle))
+
+    servo1.angle(desired_angle)
 
     # sleep 1s to give the servo time to move
     time.sleep(1)
