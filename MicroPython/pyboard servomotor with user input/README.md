@@ -1,4 +1,4 @@
-Script to take user input on a desired angle then move a servo motor connected to the `pyb.Servo(1)` pin on the pyboard. The physical pin that this corresponds to on the version of the pyboard that you have. The mapping is shown in the table below.
+Script to take user input on a desired angle then move a servo motor connected to the `pyb.Servo(1)` pin on the pyboard. The physical pin that this depends on the version of the pyboard that you have. The mapping is shown in the table below.
 
 Object Number | pyboard Pin | pyboard LITE pin  
 ------------- | :---------: | :--------------:
