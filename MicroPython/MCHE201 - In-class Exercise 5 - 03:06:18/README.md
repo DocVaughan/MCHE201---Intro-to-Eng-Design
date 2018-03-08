@@ -13,9 +13,9 @@ The sensor is connected to the pin X22 on the pyboard and should have a pull-up 
 
 For this exercise, the pattern that the LEDs should follow is:
 
-  |   |   |   |  Center  |   |   |   |   
-- | - | - | - | :------: | - | - | - | -
-4 | 3 | 2 | 1 |    0     | 1 | 2 | 3 | 4
+|   |   |   |   |  Center  |   |   |   |   |
+| - | - | - | - | :------: | - | - | - | - |
+| 4 | 3 | 2 | 1 |    0     | 1 | 2 | 3 | 4 |
 
 where the number represents the number of LEDs on. We can see from this
 chart that there are 4.5 "zones" on either side of the center. With the 
