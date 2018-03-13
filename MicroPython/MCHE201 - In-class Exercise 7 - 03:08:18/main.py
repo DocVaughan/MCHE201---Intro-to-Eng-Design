@@ -60,7 +60,7 @@ def potADCtoServoAngle(ADC_value):
     
     Inputs: 
       ADC_value : a number between 0 and 4095 representing a reading 
-                  from the poteniometer
+                  from the potentiometer
     
     Returns:
       angle : The angle to move the servo to to match the potentiomter angle
