@@ -70,11 +70,11 @@ while (True):
         # button_timing to false, stopping this loop.
         while (button_timing):
             # In this while loop, we'll place the sleep time at the beginning
-            # Doing so will "debounce" the switch. For more information on 
+            # Doing so will help "debounce" the switch. For more information on 
             # debouncing switches see:
             #  http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/debounce.html
             time.sleep_ms(10) 
-        
+
             # read the state of the input
             input_state = input_pin.value()
 
@@ -87,8 +87,7 @@ while (True):
                 time_elapsed = time.ticks_diff(end_time, start_time)
                 print("Elapsed ticks = {}\n".format(time_elapsed))
                 button_timing = False
-                
-                
+
                 # We could also have another delay here, to force a longer 
                 # separation between the pressing of the button to stop the 
                 # timer and pressing the button to start the timer again.
