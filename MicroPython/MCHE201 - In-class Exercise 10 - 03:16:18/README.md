@@ -17,4 +17,8 @@ hand.
 To generalize, you need to allow for other operations during the 30 seconds.
 These could happen inside the "button pressed" part of the code, in place of
 the pure sleep. For the final contest, you might still want long-ish delay
-here to prevent your machine from re-running if a trial 
+here to prevent your machine from re-running if a trial.
+
+The hardware to run this script without modification is shown below. 
+
+![Pushbutton and Servo Hardware Setup](pyboard_breadboard_servomotor_and_pushButton.png)
