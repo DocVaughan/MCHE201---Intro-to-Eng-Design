@@ -3,11 +3,23 @@
 #
 # This script will control a single DC motor using a TB6612 motor driver board. 
 # It should work with all Toshiba TB6612 driver breakouts, but has only been 
-# tested with the Adafruit one:
-#  https://www.adafruit.com/product/2448
+# tested with the Adafruit and SparkFun version:
+#  * https://www.adafruit.com/product/2448
+#  * https://www.sparkfun.com/products/14451
+#
+# Hardware Connection
+# pyboard | TB6612 Breakout 
+# ------- | ----------------------------
+# X6      | PWMA 
+# X7      | AIN2
+# X8      | AIN 1
+# 3V3     | Vcc
+# GND     | GND
+# -       | STBY to VCC via 10K resistor
 #
 # Motor driver shec sheet - https://cdn-shop.adafruit.com/datasheets/TB6612FNG_datasheet_en_20121101.pdf
 # Adafruit Overview - https://learn.adafruit.com/adafruit-tb6612-h-bridge-dc-stepper-motor-driver-breakout
+# SparkFun Overview - https://learn.sparkfun.com/tutorials/tb6612fng-hookup-guide
 #
 # Created: 11/01/17
 #   - Joshua Vaughan
@@ -15,7 +27,8 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 03/19/18 - JEV - joshua.vaughan@louisiana.edu
+#       - Added SparkFun links and connections tables
 #
 # TODO:
 #   * 

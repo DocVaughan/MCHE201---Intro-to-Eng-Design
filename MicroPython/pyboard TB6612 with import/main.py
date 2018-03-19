@@ -3,23 +3,36 @@
 #
 # This script will control a single DC motor using a TB6612 motor driver board. 
 # It should work with all Toshiba TB6612 driver breakouts, but has only been 
-# tested with the Adafruit one:
-#  https://www.adafruit.com/product/2448
+# tested with the Adafruit and SparkFun version:
+#  * https://www.adafruit.com/product/2448
+#  * https://www.sparkfun.com/products/14451
 #
 # In this version, we use a class developed specifically for interfacing with
 # and controlling the TB6612. It provides several convenience functions. To
 # use this class, you need to copy the TB6612.py file to the pyboard.
 #
+# Hardware Connections
+# pyboard | TB6612 Breakout 
+# ------- | ----------------------------
+# X6      | PWMA 
+# X7      | AIN2
+# X8      | AIN 1
+# 3V3     | Vcc
+# GND     | GND
+# -       | STBY to VCC via 10K resistor
+#
 # Motor driver shec sheet - https://cdn-shop.adafruit.com/datasheets/TB6612FNG_datasheet_en_20121101.pdf
 # Adafruit Overview - https://learn.adafruit.com/adafruit-tb6612-h-bridge-dc-stepper-motor-driver-breakout
-#
+# SparkFun Overview - https://learn.sparkfun.com/tutorials/tb6612fng-hookup-guide
+# 
 # Created: 11/01/17
 #   - Joshua Vaughan
 #   - joshua.vaughan@louisiana.edu
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 03/19/18 - JEV - joshua.vaughan@louisiana.edu
+#       - Added SparkFun links and connections tables
 #
 # TODO:
 #   * 
@@ -32,14 +45,14 @@ import TB6612 # import the file containing our TB6612 motor code
 # We need to set up two digital outputs that we will use to control the 
 # direction of the motor. In this case, the TB6612 class file will handle the
 # low-level settings for the pins
-A1_PIN = 'X8'
-A2_PIN = 'X7'
+A1_PIN = "X8"
+A2_PIN = "X7"
 
 # We also need to set up a third pin to control the speed of the motor. This 
 # output needs to have PWM capabilities, so it should be connected to a pin
 # that has an associated timer on the pyboard. IF these are defined correctly
 # here, then the TB6612 class file will handle the low-level set up
-PWM_PIN = 'X6'
+PWM_PIN = "X6"
 PWM_TIMER = 2
 PWM_CHANNEL = 1
 
