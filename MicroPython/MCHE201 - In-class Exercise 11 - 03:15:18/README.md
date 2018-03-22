@@ -2,11 +2,20 @@ This script is one way to solve the 11th in-class exercise from MCHE201 in the
 spring semester of 2018. 
 
 That exercise was given as:
+* Connect:
+    - the IR sensor 
+    - a pushbutton
+* Wait for the pushbutton to be pressed
+* Once it is pressed:
+    - Read the IR sensor every 100ms for 30 seconds
+    - Print its value to the REPL
+    - If objects are closer than 6 inches, turn on the RED LED
+    - Otherwise, turn on the Green LED
+* After 30 seconds, turn off all the LEDs
+ 
 
 
-This simple script to reads the value of an IR sensor every 500ms and prints 
-its value to the REPL. The yellow cable from the sensor should be connected 
-to Pin X22 on the pyboard, as shown below.
+The hardware configuration to run this script without modification is shown below.
 
 ![IR Sensor Hardware Setup](pyboard_breadboard_IRsensor.png)
 
