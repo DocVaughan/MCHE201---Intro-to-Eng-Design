@@ -59,11 +59,11 @@ while(True):
     # We can us a try...except block to make sure the user actually input a 
     # number. If not, we'll use the current angle as the desired.
     try:
-        # convert to an integer desired length (in) <- Using inches to match actuator specs
+        # convert to an integer
         desired_angle = int(desired_angle_input) 
     except ValueError:
         print("Please enter a valid number.")
-        print("Remaining at current length.")
+        print("Remaining at current angle.")
         desired_angle = current_angle
 
     # Check that the desired length is within the bounds of the actuator
