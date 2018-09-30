@@ -3,7 +3,7 @@
 #
 # simple script to read the value of a potentiometer every 500ms and print 
 # its value to the REPL. The "middle" pin of the potentiometer should be 
-# connected to Pin X22 on the pyboard.One of the outer pins should be connected
+# connected to Pin Y11 on the pyboard.One of the outer pins should be connected
 # to A3V3 (Pin X23) and the other to AGND (PIN X24), as shown below.
 #
 # Created: 10/05/17
@@ -22,7 +22,7 @@ import pyb      # import the pyboard module
 import time     # import the time module
 
 # Set up the analog-to-digital converter
-adc = pyb.ADC(pyb.Pin("X22"))
+adc = pyb.ADC(pyb.Pin("Y11"))
 
 # Now read the pot every 500ms, forever
 while (True):
