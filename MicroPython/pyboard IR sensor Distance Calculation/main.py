@@ -7,7 +7,7 @@
 # front of the sensor based on its analog output.
 # 
 # The yellow cable from the sensor should be connected 
-# to Pin X22 on the pyboard.
+# to Pin X20 on the pyboard.
 #
 # The sensor outputs approximately:
 #  * 3.1V at 4cm
@@ -27,7 +27,7 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 09/29/18 - JEV - Changed pin to match upcoming MCHE201 breakout
 #
 # TODO:
 #   * 
@@ -42,7 +42,7 @@ import time     # import the time module
 from math import exp
 
 # Set up the analog-to-digital converter
-IR_adc = pyb.ADC(pyb.Pin("X22"))
+IR_adc = pyb.ADC(pyb.Pin("X20"))
 
 # Now read the pot every 500ms, forever
 while (True):
