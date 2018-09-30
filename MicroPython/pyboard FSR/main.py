@@ -2,7 +2,7 @@
 # main.py
 #
 # simple script to read the value of a Force Sensitive Resistor (FSR) every 
-# 500ms and print  its value to the REPL. The pin connected to Pin X22 on the 
+# 500ms and print  its value to the REPL. The pin connected to Pin Y12 on the 
 # pyboard, should have a pull-down resistor of 10K connected to it as well. 
 # The other pin of the FSR flex sensor should be connected to 3.3V.
 #
