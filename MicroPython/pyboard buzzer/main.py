@@ -2,13 +2,9 @@
 # main.py
 #
 # Script to play some tunes using the piezo buzzer. Connect one size of the 
-# buzzer to Y2 and the other lead to ground.
+# buzzer to Y6 and the other lead to ground.
 #
 # On the pyboard, pin Y2 is connected to the 2nd channel of Timer 8
-# On the pyboard LITE, pin Y2 is connected to the 2nd channel of Timer 3
-#
-# This means that the pin setup of this code will be slightly different based
-# on the version board that you have.
 #
 #
 # Code adapted from that at: http://wiki.micropython.org/Play-Tone
@@ -19,7 +15,8 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 09/29/18 - JEV
+#       - Changed to pin Y6 to match coming MCHE201 breakout
 #
 # TODO:
 #   * 
@@ -120,21 +117,10 @@ DS8 = 4978
 
 
 # ----- Set up pin PWM timer for output to the buzzer ------------------------
-# 
-# Within this block of code, only uncomment the 3 lines corresponding to the 
-# version of the pyboard that you are using.
 #
-# This setup is for the pyboard. For the pyboard LITE, comment out these lines
-# and uncomment those in the next block.
-p2 = pyb.Pin("Y2") # Pin Y2 with timer 8 Channel 2
-tim = pyb.Timer(8, freq=3000)
-ch = tim.channel(2, pyb.Timer.PWM, pin=p2)
-
-# This setup is for the pyboard LITE. For the pyboard, comment out the lines
-# below and uncomment those in the previous block.
-# p2 = pyb.Pin("Y2") # Pin Y2 with timer 3 Channel 2
-# tim = pyb.Timer(3, freq=3000)
-# ch = tim.channel(2, pyb.Timer.PWM, pin=p2)
+buzzerPin = pyb.Pin("Y6") # Pin Y2 with timer 8 Channel 2
+tim = pyb.Timer(1, freq=3000)
+ch = tim.channel(1, pyb.Timer.PWM, pin=buzzerPin)
 #
 # ----- End of set up pin PWM timer for output to the buzzer ------------------
 
@@ -160,11 +146,12 @@ mario = [E7, E7, 0, E7, 0, C7, E7, 0, G7, 0, 0, 0, G6, 0, 0, 0, C7, 0, 0, G6, 0,
 
 # play Mario Bros tone example
 # source from here http://www.linuxcircle.com/2013/03/31/playing-mario-bros-tune-with-arduino-and-piezo-buzzer/
-for i in mario:
-    if i == 0:
+for note in mario:
+    if note == 0:
         ch.pulse_width_percent(0) # a pause in the sound
     else:
-        tim.freq(i) # change frequency to match the desired note
-        ch.pulse_width_percent(30)
+        tim.freq(note)              gi
+         # change frequency to match the desired note
+        ch.pulse_width_percent(30)  # Output at 30%... Don't change this!
 
     pyb.delay(150)
