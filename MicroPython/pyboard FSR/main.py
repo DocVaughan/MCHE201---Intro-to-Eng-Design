@@ -12,7 +12,8 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 09/29/18 - JEV 
+#       - Changed pin to match upcoming MCHE210 breakout board
 #
 # TODO:
 #   * 
@@ -22,7 +23,7 @@ import pyb      # import the pyboard module
 import time     # import the time module
 
 # Set up the analog-to-digital converter
-adc = pyb.ADC(pyb.Pin("X22"))
+adc = pyb.ADC(pyb.Pin("Y12"))
 
 # Now read the pot every 500ms, forever
 while (True):
@@ -37,10 +38,10 @@ while (True):
     print("ADC:     {:5d}".format(fsr_value))
     print("Voltage: {:5.2f}".format(voltage))
     
-    if fsr_value > 4090:
-        print("Press the round part to test your strength.\n")
-    elif fsr_value < 200:
+    if fsr_value > 3900:
         print("Wow!... You're strong!\n") 
+    elif fsr_value < 200:
+        print("Press the round part to test your strength.\n")
     else:
         print("Vary how hard you're pressing to watch the values change.\n")
 
