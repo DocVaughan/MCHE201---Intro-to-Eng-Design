@@ -57,7 +57,7 @@ MOTOR_NUMBER = 0 # M1
 
 # Set up the analog-to-digital converter to read the linear actuator 
 # potentiometer that gives us information on its current length
-linear_adc = pyb.ADC(pyb.Pin("X22"))
+linear_adc = pyb.ADC(pyb.Pin("X21"))
 
 # We'll also define some constants for use in this code
 # Change these two values to match those at the limits of your actuator.
