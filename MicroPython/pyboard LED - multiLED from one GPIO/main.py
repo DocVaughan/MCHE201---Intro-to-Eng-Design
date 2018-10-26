@@ -5,7 +5,7 @@
 # it to control a pair of external LEDs connected to pin X7 of the pyboard. In
 # this configuration, when the output pin is high, one LED will be on, and when
 # the output pin is low, the other will be on. To turn both off, we need to 
-# redefine the pin as an input
+# redefine the pin as an input.
 #
 # Created: 10/26/18
 #   - Joshua Vaughan

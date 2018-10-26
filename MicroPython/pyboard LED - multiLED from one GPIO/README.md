@@ -2,4 +2,4 @@ This simple script demonstrates control a digital ouptut. In the hardware config
 
 The hardware configuration to run this script without modification is shown below. The resistors are both 330ohm. 
 
-![Multi-LED Hardware Setup](pyboard_breadboard_multiLEDoneGPIO.png)
+![Multi-LED Hardware Setup](pyboard_breadboard_multiLEDoneGPIO.png) 
