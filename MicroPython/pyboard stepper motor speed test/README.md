@@ -4,7 +4,7 @@ This script demonstrates a simple way to determine the actual speed of a stepper
 
 For more information on the step modes, and the pros/cons of each, the [wikipedia article on stepper motors](https://en.wikipedia.org/wiki/Stepper_motor#Phase_current_waveforms) provides a good high-level overview.
 
-This code requires the .mpy files from the [Adafruit repository](https://github.com/adafruit/micropython-adafruit-pca9685) to be on the pyboard. If you are running on the pyboard LITE, you will need the `.py` files found within that repository; the `.mpy` files will not work.
+This code requires the .mpy files from the [Dr. Vaughan's fork of the Adafruit repository](https://github.com/DocVaughan/micropython-adafruit-pca9685) to be on the pyboard. Be sure to get the files from the release corresponding to the version of MicroPython that you are using.If you are running on the pyboard LITE, you will need the `.py` files found within that repository; the `.mpy` files will not work.
 
 For more information see:
 https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver

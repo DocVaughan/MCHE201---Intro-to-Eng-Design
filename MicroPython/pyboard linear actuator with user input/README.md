@@ -4,7 +4,7 @@ The linear actuator actually has a DC motor inside, so we control it using the s
 
 This script reads the value of the potentiometer, then uses a mapping of its value to the actuator length to determine the current position of the actuator. This value is then used to generate the command to drive the actuator to a desired length. The command represents a simple on/off controller. If the actuator is outside a tolerable range around the desired length, it is moved at ~1/2 speed in the direction needed. Once within that tolerable range of length, it is stopped.
 
-This code requires the .mpy files from the [Adafruit repository](https://github.com/adafruit/micropython-adafruit-pca9685) to be on the pyboard.
+This code requires the .mpy files from the [Dr. Vaughan's fork of the Adafruit repository](https://github.com/DocVaughan/micropython-adafruit-pca9685) to be on the pyboard. Be sure to get the files from the release corresponding to the version of MicroPython that you are using.
  
 For more information see:
 https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver

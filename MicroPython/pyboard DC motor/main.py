@@ -4,9 +4,10 @@
 # script to demonstrate the basic functionality of a DC motor using the
 # pyboard connected over i2c to a Adafruit Motor Driver Shield
 #
-# This code requires the .mpy files from the repository linked below to be
-# on the pyboard.
-#  https://github.com/adafruit/micropython-adafruit-pca9685
+# This code requires the .mpy files from the Dr. Vaughan's fork of the 
+# Adafruit repository to be on the pyboard. Be sure to get the files from the 
+# release corresponding to the version of MicroPython that you are using.
+#  https://github.com/DocVaughan/micropython-adafruit-pca9685 
 #
 # For more information see:
 #  https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver

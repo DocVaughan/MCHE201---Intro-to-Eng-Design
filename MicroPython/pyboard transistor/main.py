@@ -7,8 +7,8 @@
 # control an LED, but it provides an easy example setup. In general, we could a 
 # transistor to effectively switch a higher-current or higher-voltage load. 
 # When using a transistor this way, be sure to stay within its voltage and 
-# current limits. 
-# 
+# current limits. For high current or voltage loads, a mosfet is generally a 
+# better choice.
 #
 # To use this script as is, connect the center pin (the base) of the NPN 
 # transistor to pin X7 of the pyboard.

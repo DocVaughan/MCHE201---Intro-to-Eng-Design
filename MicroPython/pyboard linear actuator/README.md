@@ -4,8 +4,8 @@ The linear actuator actually has a DC motor inside, so we control it using the s
 
 The linear actuator also a potentiometer that can give us information about the position of the actuator. This script does not utilize that information.
 
-This code requires the .mpy files from the [Adafruit repository](https://github.com/adafruit/micropython-adafruit-pca9685) to be on the pyboard.
- 
+This code requires the .mpy files from the [Dr. Vaughan's fork of the Adafruit repository](https://github.com/DocVaughan/micropython-adafruit-pca9685) to be on the pyboard. Be sure to get the files from the release corresponding to the version of MicroPython that you are using.
+
 For more information see:
 https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver
 
