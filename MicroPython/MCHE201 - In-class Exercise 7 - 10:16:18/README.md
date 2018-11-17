@@ -1,4 +1,4 @@
-This script is one way to solve the 7th in-class exercise from MCHE201 in the spring semester of 2018.
+This script is one way to solve the 7th in-class exercise from MCHE201 in the fall semester of 2018.
 
 That exercise was given as:
  * Attach a potentiometer

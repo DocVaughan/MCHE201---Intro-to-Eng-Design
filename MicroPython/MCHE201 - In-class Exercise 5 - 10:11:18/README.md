@@ -3,7 +3,7 @@ fall semester of 2018.
 
 That exercise was given as:
   * Divide the flex sensor range into four
-  * Turn on the same number LEDs as the “range number” of the current state 
+  * Turn on the same number LEDs as the "range number" of the current state 
     of the flex sensor.
   * In other words, when the sensor is not bent, no LEDs should be on. When 
     it's bent a little, one LED should turn on. When it's bent to its 
