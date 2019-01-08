@@ -3,7 +3,7 @@
 #
 # This is a template script showing how to start a device based on the 
 # start signal closing. It assumes that the external digital input connected to
-# pin X4. The internal pull-down resistor is used. In this version, we use an
+# pin X6. The internal pull-down resistor is used. In this version, we use an
 # interrupt to change the value of a flag variable. This is the more advanced
 # way to sense a condition like this and how it would/should be done once you
 # have some experience.
@@ -17,7 +17,7 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 09/29/18 - JEV - Changed pin to match upcoming MCHE201 breakout
 #
 # TODO:
 #   * 
@@ -53,7 +53,7 @@ start_trial = False
 # We set it up as an input with a pulldown resistor and add an interrupt to 
 # handle when it is pressed. This interrupt looks for rising edges, meaning 
 # when the state changes from low to high
-start_pin = pyb.ExtInt(pyb.Pin('X4'), 
+start_pin = pyb.ExtInt(pyb.Pin('X6'), 
                        pyb.ExtInt.IRQ_RISING, 
                        pyb.Pin.PULL_DOWN, 
                        handle_start_signal)

@@ -3,7 +3,7 @@
 #
 # simple script to read the value of a the IR sensor every 500ms and print 
 # its value to the REPL. The yellow cable from the sensor should be connected 
-# to Pin X22 on the pyboard.
+# to Pin X20 on the pyboard.
 #
 # The sensor outputs approximately:
 #  * 3.1V at 4cm
@@ -21,7 +21,7 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 09/29/18 - JEV - Changed pin to match upcoming MCHE201 breakout
 #
 # TODO:
 #   * 
@@ -31,7 +31,7 @@ import pyb      # import the pyboard module
 import time     # import the time module
 
 # Set up the analog-to-digital converter
-IR_adc = pyb.ADC(pyb.Pin("X22"))
+IR_adc = pyb.ADC(pyb.Pin("X20"))
 
 # Now read the pot every 500ms, forever
 while (True):

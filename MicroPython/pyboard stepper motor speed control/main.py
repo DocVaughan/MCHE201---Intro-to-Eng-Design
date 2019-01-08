@@ -8,9 +8,10 @@
 # See the pyboard stepper motor folder in this repository for basic control:
 #  https://git.io/vFCw1
 #
-# This code requires the .mpy files from the repository linked below to be
-# on the pyboard.
-#  https://github.com/adafruit/micropython-adafruit-pca9685
+# This code requires the .mpy files from the Dr. Vaughan's fork of the 
+# Adafruit repository to be on the pyboard. Be sure to get the files from the 
+# release corresponding to the version of MicroPython that you are using.
+#  https://github.com/DocVaughan/micropython-adafruit-pca9685 
 #
 # For more information on the driver board:
 #  https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver

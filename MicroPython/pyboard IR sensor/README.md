@@ -1,6 +1,6 @@
 This simple script to reads the value of an IR sensor every 500ms and prints 
 its value to the REPL. The yellow cable from the sensor should be connected 
-to Pin X22 on the pyboard, as shown below.
+to Pin X20 on the pyboard, as shown below.
 
 ![IR Sensor Hardware Setup](pyboard_breadboard_IRsensor.png)
 

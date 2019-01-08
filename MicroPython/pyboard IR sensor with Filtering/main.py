@@ -8,7 +8,7 @@
 # using an Exponential Moving Average. For more info
 # 
 # The yellow cable from the sensor should be connected 
-# to Pin X22 on the pyboard.
+# to Pin X20 on the pyboard.
 #
 # The sensor outputs approximately:
 #  * 3.1V at 4cm
@@ -28,7 +28,7 @@
 #   - http://www.ucs.louisiana.edu/~jev9637
 #
 # Modified:
-#   * 
+#   * 09/29/18 - JEV - Changed pin to match upcoming MCHE201 breakout
 #
 # TODO:
 #   * 
@@ -43,7 +43,7 @@ import time     # import the time module
 from math import exp
 
 # Set up the analog-to-digital converter
-IR_adc = pyb.ADC(pyb.Pin("X22"))
+IR_adc = pyb.ADC(pyb.Pin("X20"))
 
 # For the choices below, we more-or-less are approximating using an average of 
 # the 10 values to determine the current value. You should tune these values 

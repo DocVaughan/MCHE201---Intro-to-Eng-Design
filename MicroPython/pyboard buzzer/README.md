@@ -1,7 +1,7 @@
 Script to play some tunes using the piezo buzzer. Connect one lead of the 
 buzzer to Y2 and the other lead to ground.
 
-On the pyboard, pin Y2 is connected to the 2nd channel of Timer 8. However, on the pyboard LITE, pin Y2 is connected to the 2nd channel of Timer 3.
+On the pyboard, pin Y6 is connected to the 2nd channel of Timer 1. However, on the pyboard LITE, pin Y6 is connected to the 1st channel of Timer 1.
 
 This means that the pin setup of this code will be slightly different based
 on the version board that you have. Only one set of the lines of code inside the block below should be uncommented based on the board that you have.
