@@ -150,8 +150,8 @@ for note in mario:
     if note == 0:
         ch.pulse_width_percent(0) # a pause in the sound
     else:
-        tim.freq(note)              gi
-         # change frequency to match the desired note
+        tim.freq(note)
+        # change frequency to match the desired note
         ch.pulse_width_percent(30)  # Output at 30%... Don't change this!
 
     pyb.delay(150)
