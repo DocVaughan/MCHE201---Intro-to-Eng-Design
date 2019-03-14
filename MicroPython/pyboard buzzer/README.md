@@ -14,9 +14,9 @@ on the version board that you have. Only one set of the lines of code inside the
 #
 # This setup is for the pyboard. For the pyboard LITE, comment out these lines
 # and uncomment those in the next block.
-p2 = pyb.Pin("Y2") # Pin Y2 with timer 8 Channel 2
-tim = pyb.Timer(8, freq=3000)
-ch = tim.channel(2, pyb.Timer.PWM, pin=p2)
+buzzerPin = pyb.Pin("Y6") # Pin Y1 with timer 1 Channel 1
+tim = pyb.Timer(1, freq=3000)
+ch = tim.channel(1, pyb.Timer.PWM, pin=buzzerPin)
 
 # This setup is for the pyboard LITE. For the pyboard, comment out the lines
 # below and uncomment those in the previous block.
@@ -29,6 +29,6 @@ ch = tim.channel(2, pyb.Timer.PWM, pin=p2)
 
 The hardware setup to use this script is shown below.
 
-![The Buzzer Hardware Setup](https://github.com/DocVaughan/MCHE201---Intro-to-Eng-Design/blob/Fall-2017/MicroPython/pyboard%20buzzer/pyboard_breadboard_buzzer.png)
+![The Buzzer Hardware Setup](pyboard_breadboard_buzzer.png)
 
 Code adapted from that at: http://wiki.micropython.org/Play-Tone
