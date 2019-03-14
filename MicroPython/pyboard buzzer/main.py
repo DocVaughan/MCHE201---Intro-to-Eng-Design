@@ -4,7 +4,7 @@
 # Script to play some tunes using the piezo buzzer. Connect one size of the 
 # buzzer to Y6 and the other lead to ground.
 #
-# On the pyboard, pin Y2 is connected to the 2nd channel of Timer 8
+# On the pyboard, pin Y6 is connected to the 2nd channel of Timer 1
 #
 #
 # Code adapted from that at: http://wiki.micropython.org/Play-Tone
@@ -118,28 +118,28 @@ DS8 = 4978
 
 # ----- Set up pin PWM timer for output to the buzzer ------------------------
 #
-buzzerPin = pyb.Pin("Y6") # Pin Y2 with timer 8 Channel 2
+buzzerPin = pyb.Pin("Y6") # Pin Y1 with timer 1 Channel 1
 tim = pyb.Timer(1, freq=3000)
 ch = tim.channel(1, pyb.Timer.PWM, pin=buzzerPin)
 #
 # ----- End of set up pin PWM timer for output to the buzzer ------------------
 
-# define a list of the tones defined above
-note = [B0, C1, CS1, D1, DS1, E1, F1, FS1, G1, GS1, A1, AS1, B1, C2, CS2, D2, DS2, E2, F2, FS2, G2, GS2, A2, AS2, B2, C3, CS3, D3, DS3, E3, F3, FS3, G3, GS3, A3, AS3, B3, C4, CS4, D4, DS4, E4, F4, FS4, G4, GS4, A4, AS4, B4, C5, CS5, D5, DS5, E5, F5, FS5, G5, GS5, A5, AS5, B5, C6, CS6, D6, DS6, E6, F6, FS6, G6, GS6, A6, AS6, B6, C7, CS7, D7, DS7, E7, F7, FS7, G7, GS7, A7, AS7, B7, C8, CS8, D8, DS8]
+## define a list of the tones defined above
+# note = [B0, C1, CS1, D1, DS1, E1, F1, FS1, G1, GS1, A1, AS1, B1, C2, CS2, D2, DS2, E2, F2, FS2, G2, GS2, A2, AS2, B2, C3, CS3, D3, DS3, E3, F3, FS3, G3, GS3, A3, AS3, B3, C4, CS4, D4, DS4, E4, F4, FS4, G4, GS4, A4, AS4, B4, C5, CS5, D5, DS5, E5, F5, FS5, G5, GS5, A5, AS5, B5, C6, CS6, D6, DS6, E6, F6, FS6, G6, GS6, A6, AS6, B6, C7, CS7, D7, DS7, E7, F7, FS7, G7, GS7, A7, AS7, B7, C8, CS8, D8, DS8]
 
-# Now, loop through them, playing each for 300ms
-for i in note:
-    # Set the timer frequency
-    tim.freq(i)
-    
-    # Print the current frequency
-    print("Current Frequency: {}".format(i))
-    
-    # Output at 30%... Don't change this!
-    ch.pulse_width_percent(30)
-    
-    # Delay in order to play the note for a nonzero amount of time
-    pyb.delay(300)
+# # Now, loop through them, playing each for 300ms
+# for i in note:
+#     # Set the timer frequency
+#     tim.freq(i)
+#     
+#     # Print the current frequency
+#     print("Current Frequency: {}".format(i))
+#     
+#     # Output at 30%... Don't change this!
+#     ch.pulse_width_percent(30)
+#     
+#     # Delay in order to play the note for a nonzero amount of time
+#     pyb.delay(300)
 
 # Define a sequence of notes to play the Super Mario Bros. theme
 mario = [E7, E7, 0, E7, 0, C7, E7, 0, G7, 0, 0, 0, G6, 0, 0, 0, C7, 0, 0, G6, 0, 0, E6, 0, 0, A6, 0, B6, 0, AS6, A6, 0, G6, E7, 0, G7, A7, 0, F7, G7, 0, E7, 0,C7, D7, B6, 0, 0, C7, 0, 0, G6, 0, 0, E6, 0, 0, A6, 0, B6, 0, AS6, A6, 0, G6, E7, 0, G7, A7, 0, F7, G7, 0, E7, 0,C7, D7, B6, 0, 0]
@@ -149,6 +149,7 @@ mario = [E7, E7, 0, E7, 0, C7, E7, 0, G7, 0, 0, 0, G6, 0, 0, 0, C7, 0, 0, G6, 0,
 for note in mario:
     if note == 0:
         ch.pulse_width_percent(0) # a pause in the sound
+
     else:
         tim.freq(note)
         # change frequency to match the desired note
