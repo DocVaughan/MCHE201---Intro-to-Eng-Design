@@ -4,3 +4,7 @@ One of the other pins should be connected to 3.3V, and the final pin to
 ground, as shown below.
 
 ![Soft Potentiometer Hardware Setup](pyboard_breadboard_softPotentiometer.png)
+
+This script will also work as is with the MCHE201 controller board with the hardware configuration shown in the figure below.
+
+![MCHE201 Controller Board Soft Potentiometer Hardware Setup](MCHE201board_softPotentiometer.png)

@@ -4,3 +4,7 @@ its value to the REPL. The sensor is connected to the pin X22 on the pyboard and
 The hardware setup is shown below.
 
 ![Flex Sensor Hardware Setup](pyboard_breadboard_FlexSensor_cropped.png)
+
+This script will also work as is with the MCHE201 controller board with the hardware configuration shown in the figure below.
+
+![MCHE201 Controller Board Flex Sensor Hardware Setup](MCHE201board_FlexSensor.png)

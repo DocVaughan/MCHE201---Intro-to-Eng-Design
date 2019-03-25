@@ -12,6 +12,10 @@ The configurations to run this script without modification for the pyboard and p
 
 ![Servo Hardware Setup](servoSetupComparison.png)
 
+This script will also work as is with the MCHE201 controller board with the hardware configuration shown in the figure below.
+
+![MCHE201 Controller Board Servomotor Setup](MCHE201board_servomotor.png)
+
 This code is adapted from that at: 
  http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/servo.html
 
