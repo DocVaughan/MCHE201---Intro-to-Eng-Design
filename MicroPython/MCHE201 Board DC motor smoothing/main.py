@@ -67,18 +67,18 @@ try:
     while (True):
         elapsed_time = time.ticks_diff(time.ticks_ms(), start_time)
         
-        # If the elapsed time is less than 3 seconds, then the desired duty
-        # cycle is 1000/4095
+        # If the elapsed time is less than 3 seconds, then the desired speed is
+        # 45% forward
         if (elapsed_time < 3000):
             desired_speed = 45
         
         # else if the time is less than 6s (In other words, between 3 and 6s),
-        # then the desired duty cycle is 2000/4095
+        # then the desired morot speed is 100% forward
         elif (elapsed_time < 6000):
             desired_speed = 100
         
         # If the elapsed time is both greater than 3s and greater than 6s
-        # then the desired duty cycle is 0
+        # then the desired motor speed is 0
         else:
             desired_speed = 0
 

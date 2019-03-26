@@ -13,6 +13,6 @@ For more information on the [Exponential Moving Average (EMA) wikipedia page](ht
  
 *Note:* The `alpha` in the Wikipedia entry is actually the `(1-alpha)` term of the formulation shown here.
 
-This code requires the .py files from the [MCHE201 Controller Board repository](https://github.com/DocVaughan/MCHE201_Controller) to be on the pyboard.
+This code requires the `.py` files from the [MCHE201 Controller Board repository](https://github.com/DocVaughan/MCHE201_Controller) to be on the pyboard.
 
 ![DC Motor Setup](MCHE201Board_DCmotor.png)
