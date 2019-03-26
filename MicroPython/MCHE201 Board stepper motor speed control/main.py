@@ -2,11 +2,11 @@
 # main.py
 #
 # script to demonstrate a simple way to vary the speed of a stepper motor 
-# using the pyboard connected over i2c to a Adafruit Motor Driver Shield. It
+# using the pyboard connected to the MCHE201 controller board. It
 # also demonstrates the different step types.
 #
 # See the pyboard stepper motor folder in this repository for basic control:
-#  https://git.io/vFCw1
+#  https://git.io/fjU2i
 #
 # This code requires the .py files from the MCHE201 Controller Board repository
 # found at:

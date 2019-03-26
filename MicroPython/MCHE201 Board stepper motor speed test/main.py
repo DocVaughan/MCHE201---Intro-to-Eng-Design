@@ -15,8 +15,7 @@
 #
 #
 # See the pyboard stepper motor folder in this repository for basic control:
-#  https://git.io/vFCw1
-#
+#  https://git.io/fjU2i
 #
 # The motors in the MCHE 201 kits have 200 steps/rev.
 #  https://www.adafruit.com/product/324
