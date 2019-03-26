@@ -9,18 +9,12 @@
 # For mor information on the Exponential Moving Average (EMA), see:
 #  https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average
 #
-# This code requires the .mpy files from the Dr. Vaughan's fork of the 
-# Adafruit repository to be on the pyboard. Be sure to get the files from the 
-# release corresponding to the version of MicroPython that you are using.
-#  https://github.com/DocVaughan/micropython-adafruit-pca9685 
-#
-# For more information see:
-#  https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver
-#  The circuit on the shield is identical to the Feather board shown in that
-#  tutorial.
+# This code requires the .py files from the MCHE201 Controller Board repository
+# found at:
+#    https://github.com/DocVaughan/MCHE201_Controller
 #
 #
-# Created: 11/11/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+# Created: 03/26/19 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
 #   * 
@@ -41,15 +35,14 @@ import machine
 import motor
 
 # Initialize communication with the motor driver
-i2c = machine.I2C(scl=machine.Pin('Y9'), sda=machine.Pin('Y10'))
+i2c = machine.I2C(scl=machine.Pin("X9"), sda=machine.Pin("X10"))
 
 # And, then initialize the DC motor control object
 motors = motor.DCMotors(i2c)
 
 # Now, we can initialize the DC motor object. The number should match the
-# motor number = (number on the motor driver board - 1)
-# For example, M1 on the board is motor 0, M2 on the board is motor 1, etc
-MOTOR_NUMBER = 0 # DC motor M1
+# motor number on the motor driver board
+MOTOR_NUMBER = 1 # DC1
 
 # We'll define a variable to hold a running average of our prior speed commands
 last_speed = 0
@@ -77,12 +70,12 @@ try:
         # If the elapsed time is less than 3 seconds, then the desired duty
         # cycle is 1000/4095
         if (elapsed_time < 3000):
-            desired_speed = 1000
+            desired_speed = 45
         
         # else if the time is less than 6s (In other words, between 3 and 6s),
         # then the desired duty cycle is 2000/4095
         elif (elapsed_time < 6000):
-            desired_speed = 2000
+            desired_speed = 100
         
         # If the elapsed time is both greater than 3s and greater than 6s
         # then the desired duty cycle is 0
