@@ -3,42 +3,31 @@
 #
 # Script to demonstrate the using the potentiometer of the linear actuator in 
 # a feedback controller on its length. We use a simple on/off controller based
-# on a deadzone around the desired length. The pyboard connected over i2c to a 
-# Adafruit Motor Driver Shield.
+# on a deadzone around the desired length. The pyboard connected to the MCHE201
+# controller board
 #
-# The linear actuator actually has a DC motor inside, so we control it 
-# using the same commands that we would issue to a DC motor connected to the
-# board.
-#
-# It also a potentiometer that can give us information about the position of 
-# the actuator. Its value will be near Vcc (3.3VDC in this case) when fully 
-# retracted and near 0VDC when fully extended. You should test your linear 
-# actuator to determine the ADC values corresponding to its limits. They will
-# vary slightly.
+# The linear actuator has a potentiometer that can give us information about 
+# the position of the actuator. Its value will be near Vcc (3.3VDC in this case) 
+# when fully retracted and near 0VDC when fully extended. You should test your 
+# linear actuator to determine the ADC values corresponding to its limits. They 
+# will vary slightly.
 # 
 # This script reads the value of the potentiometer, then using
 # a mapping of its value to the actuator length to determine the current
-# position of the actuator. This value is then used to generate the motor speed
+# position of the actuator. This value is then used to generate the speed
 # command for the actuator to drive the actuator to a desired length. If the
 # actuator is outside a tolerable range around the desired length, it is moved
 # at ~1/2 speed in the direction needed. Once within that tolerable range of 
 # length it is stopped.
 #
-#
 # The linear actuators in the MCHE 201 kits are:
 #  https://www.servocity.com/hda4-2
 #
-# This code requires the .mpy files from the Dr. Vaughan's fork of the 
-# Adafruit repository to be on the pyboard. Be sure to get the files from the 
-# release corresponding to the version of MicroPython that you are using.
-#  https://github.com/DocVaughan/micropython-adafruit-pca9685 
+# This code requires the .py files from the MCHE201 Controller Board repository
+# found at:
+#    https://github.com/DocVaughan/MCHE201_Controller
 #
-# For more information see:
-#  https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver
-#  The circuit on the shield is identical to the Feather board shown in that
-#  tutorial.
-#
-# Created: 11/04/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+# Created: 03/26/19 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
 #   * mm/dd/yy - Name (email if not same person as above)
@@ -59,22 +48,17 @@ import time # import the time module (remove if not using)
 # to determine what direction to move the actuator
 from math import copysign 
 
-# We'll use the machine i2c implementation. It's what the Adafruit library expects
+# We'll use the machine i2c implementation.
 import machine 
 
-# We also need to import the DC motor code from the library
-import motor
+# We also need to import the linear actuator code from the library
+import actuator
 
 # Initialize communication with the motor driver
-i2c = machine.I2C(scl=machine.Pin('Y9'), sda=machine.Pin('Y10'))
+i2c = machine.I2C(scl=machine.Pin("X9"), sda=machine.Pin("X10"))
 
-# And, then initialize the DC motor control object
-motors = motor.DCMotors(i2c)
-
-# Now, we can initialize the DC motor object. The number should match the
-# motor number = (number on the motor driver board - 1)
-# For example, M1 on the board is motor 0, M2 on the board is motor 1, etc
-MOTOR_NUMBER = 0 # M1
+# And, then initialize the linear actuator control object
+linear_actuator = actuator.LinearActuator(i2c)
 
 # Set up the analog-to-digital converter to read the linear actuator 
 # potentiometer that gives us information on its current length
@@ -158,7 +142,7 @@ try:
     length_dir = copysign(1, length_error) 
 
     # Now, we can start the actuator at 1/2 speed toward the desired length
-    motors.speed(MOTOR_NUMBER, int(length_dir)*2048)
+    linear_actuator.set_speed(int(length_dir)*50)
     
     # Then, keep moving while we are outside of the tolerable bounds around desired 
     while (linear_length > max_tolerable_length) or (linear_length < min_tolerable_length): 
@@ -179,14 +163,14 @@ try:
         time.sleep_ms(1) # sleep 1ms
 
     # When the while loop breaks, we should be within our tolerable bounds
-    # around the desired length. So, we stop the motor and report the final 
+    # around the desired length. So, we stop the actuator and report the final 
     # position
-    motors.speed(MOTOR_NUMBER, 0)
+    linear_actuator.set_speed(0)
     print("\nStopped at {:.4f}in for a desired length of {:.2f}in.\n\n".format(linear_length, desired_length))
 
 except:
-    print("Error. Stopping motors.")
-    motors.speed(MOTOR_NUMBER, 0)
+    print("Some problem occured. Stopping the actuator.")
+    linear_actuator.set_speed(0)
     
     # If we call raise here, we'll still get the information on why the 
     # exception was raised in the first place. Without this, we do not.

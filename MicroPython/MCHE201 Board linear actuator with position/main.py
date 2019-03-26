@@ -15,21 +15,14 @@
 # The linear actuators in the MCHE 201 kits are:
 #  https://www.servocity.com/hda4-2
 #
-# This code requires the .mpy files from the Dr. Vaughan's fork of the 
-# Adafruit repository to be on the pyboard. Be sure to get the files from the 
-# release corresponding to the version of MicroPython that you are using.
-#  https://github.com/DocVaughan/micropython-adafruit-pca9685 
+# This code requires the .py files from the MCHE201 Controller Board repository
+# found at:
+#    https://github.com/DocVaughan/MCHE201_Controller
 #
-# For more information see:
-#  https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver
-#  The circuit on the shield is identical to the Feather board shown in that
-#  tutorial.
-#
-# Created: 10/29/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+# Created: 03/26/19 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
-#   * 11/08/17 - JEV - joshua.vaughan@louisiana.edu
-#     - added raise to exception to push through what error caused the problem
+#   * 
 #
 # TODO:
 #   * mm/dd/yy - Major bug to fix
@@ -39,22 +32,17 @@
 import pyb  # import the pyboard module
 import time # import the time module (remove if not using)
 
-# We'll use the machine i2c implementation. It's what the Adafruit library expects
+# We'll use the machine i2c implementation.
 import machine 
 
-# We also need to import the DC motor code from the library
-import motor
+# We also need to import the linear actuator code from the library
+import actuator
 
 # Initialize communication with the motor driver
-i2c = machine.I2C(scl=machine.Pin('Y9'), sda=machine.Pin('Y10'))
+i2c = machine.I2C(scl=machine.Pin("X9"), sda=machine.Pin("X10"))
 
-# And, then initialize the DC motor control object
-motors = motor.DCMotors(i2c)
-
-# Now, we can initialize the DC motor object. The number should match the
-# motor number = (number on the motor driver board - 1)
-# For example, M1 on the board is motor 0, M2 on the board is motor 1, etc
-MOTOR_NUMBER = 0 # M1
+# And, then initialize the linear actuator control object
+linear_actuator = actuator.LinearActuator(i2c)
 
 # Set up the analog-to-digital converter to read the linear actuator 
 # potentiometer that gives us information on its current length
@@ -93,8 +81,8 @@ def calculate_length(adc_value):
 # while printing out the current ADC value and calculated length
 try:
     # Move the actuator in one direction, ramping up to 1/2 speed
-    for speed in range(2048):
-        motors.speed(MOTOR_NUMBER, speed)
+    for speed in range(50):
+        linear_actuator.set_speed(speed)
         
         # Read the potentiometer of the linear actuator and print out its value
         linear_pot = linear_adc.read()
@@ -108,8 +96,8 @@ try:
 
     # Stop the actuator, then move it in the opposite direction, 
     # ramping up to 1/2 speed in that direction
-    for speed in range(4095):
-        motors.speed(MOTOR_NUMBER, 2048 - speed)
+    for speed in range(100):
+        linear_actuator.set_speed(50 - speed)
         
         # Read the potentiometer of the linear actuator and print out its value
         linear_pot = linear_adc.read()
@@ -122,8 +110,8 @@ try:
         time.sleep_ms(1)
         
     # Ramp down from 1/2 speed to zero speed
-    for speed in range(2048):
-        motors.speed(MOTOR_NUMBER, -2048 + speed)
+    for speed in range(50):
+        linear_actuator.set_speed(-50 + speed)
         
         # Read the potentiometer of the linear actuator and print out its value
         linear_pot = linear_adc.read()
@@ -137,8 +125,12 @@ try:
 
 except: # If any error occurs, then stop
     print("Some error occured. Stopping.")
-    motors.speed(MOTOR_NUMBER, 0)
+    linear_actuator.set_speed(0)
     
     # If we call raise here, we'll still get the information on why the 
     # exception was raised in the first place. Without this, we do not.
     raise 
+
+finally: # Be sure that we are issuing a final speed of exactly 0
+    print("Stopping.")
+    linear_actuator.set_speed(0)
