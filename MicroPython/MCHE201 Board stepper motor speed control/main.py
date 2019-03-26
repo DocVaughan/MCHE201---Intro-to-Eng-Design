@@ -8,23 +8,14 @@
 # See the pyboard stepper motor folder in this repository for basic control:
 #  https://git.io/vFCw1
 #
-# This code requires the .mpy files from the Dr. Vaughan's fork of the 
-# Adafruit repository to be on the pyboard. Be sure to get the files from the 
-# release corresponding to the version of MicroPython that you are using.
-#  https://github.com/DocVaughan/micropython-adafruit-pca9685 
-#
-# For more information on the driver board:
-#  https://learn.adafruit.com/micropython-hardware-pca9685-dc-motor-and-stepper-driver
-#  The circuit on the shield is identical to the Feather board shown in that
-#  tutorial.
-#
-# The motors in the MCHE 201 kits have 200 steps/rev.
-#  https://www.adafruit.com/product/324
+# This code requires the .py files from the MCHE201 Controller Board repository
+# found at:
+#  https://github.com/DocVaughan/MCHE201_Controller
 #
 # For more information on the different step types, see:
 #  https://en.wikipedia.org/wiki/Stepper_motor#Phase_current_waveforms
 #
-# Created: 11/04/17 - Joshua Vaughan - joshua.vaughan@louisiana.edu
+# Created: 03/26/19 - Joshua Vaughan - joshua.vaughan@louisiana.edu
 #
 # Modified:
 #   * mm/dd/yy - Name (email if not same person as above)
@@ -48,7 +39,7 @@ import machine
 import stepper
 
 # Initialize communication with the motor driver
-i2c = machine.I2C(scl=machine.Pin('Y9'), sda=machine.Pin('Y10'))
+i2c = machine.I2C(scl=machine.Pin("X9"), sda=machine.Pin("X10"))
 
 # Now, we can initialize the stepper motor object
 steppers = stepper.Steppers(i2c)
