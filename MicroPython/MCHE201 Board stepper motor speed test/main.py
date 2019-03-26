@@ -40,7 +40,7 @@
 import pyb  # import the pyboard module
 import time # import the time module (remove if not using)
 
-# We'll use the machine i2c implementation. It's what the Adafruit library expects
+# We'll use the machine i2c implementation.
 import machine 
 
 # We also need to import the stepper motor code from the library

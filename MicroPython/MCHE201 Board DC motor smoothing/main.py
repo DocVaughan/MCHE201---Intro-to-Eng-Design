@@ -28,7 +28,7 @@ import pyb  # import the pyboard module
 import time # import the time module (remove if not using)
 
 # We'll use the machine i2c implementation. 
-# It's what the Adafruit library expects
+#
 import machine 
 
 # We also need to import the DC motor code from the library
@@ -95,14 +95,14 @@ try:
         print("\nDesired speed:    {:+6d}".format(desired_speed))
         print("Current command:  {:+6d}".format(int(speed)))
         
-        motors.speed(MOTOR_NUMBER, int(speed))
+        motors.set_speed(MOTOR_NUMBER, int(speed))
     
         # Sleep 10ms (0.01s)
         time.sleep_ms(10)
 
 except:
     print("Error. Stopping motors.")
-    motors.speed(MOTOR_NUMBER, 0)
+    motors.set_speed(MOTOR_NUMBER, 0)
     
     # If we call raise here, we'll still get the information on why the 
     # exception was raised in the first place. Without this, we do not.
