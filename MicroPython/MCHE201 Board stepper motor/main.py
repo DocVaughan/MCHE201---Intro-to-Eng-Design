@@ -37,14 +37,7 @@ import stepper
 i2c = machine.I2C(scl=machine.Pin("X9"), sda=machine.Pin("X10"))
 
 # Now, we can initialize the stepper motor object
-steppers = stepper.Steppers(i2c)
-
-# Then, create an instance for the connected stepper motor
-# Use index 0 if the motor is connected to M1 & M2
-# Use index 1 if the motor is connected to M3 & M4
-STEPPER_MOTOR_NUM = 0
-
-stepper0 = steppers.get_stepper(STEPPER_MOTOR_NUM)
+stepper_motor = stepper.StepperMotor(i2c)
 
 # Now, we can control the motor. To make it move one step in SINGLE step mode
 # Note that the onestep() function is blocking. Nothing else will run while the
