@@ -44,12 +44,6 @@ i2c = machine.I2C(scl=machine.Pin("X9"), sda=machine.Pin("X10"))
 # Now, we can initialize the stepper motor object
 stepper_motor = stepper.StepperMotor(i2c)
 
-# Then, create an instance for the connected stepper motor
-# Use index 0 if the motor is connected to M1 & M2
-# Use index 1 if the motor is connected to M3 & M4
-STEPPER_MOTOR_NUM = 0
-stepper0 = steppers.get_stepper(STEPPER_MOTOR_NUM)
-
 # To make the motor move more than one step, we need to repeatedly call
 # the one-step function. 
 #
@@ -62,7 +56,7 @@ stepper0 = steppers.get_stepper(STEPPER_MOTOR_NUM)
 # cause the motor to turn one full revolution.
 print("Moving 1 revolution forward in SINGLE step mode.")
 for index in range(200):
-    stepper0.onestep(stepper.FORWARD, stepper.SINGLE)
+    stepper_motor.onestep(stepper.FORWARD, stepper.SINGLE)
     
     # Pause 10ms (0.01s) between each step
     # This means the motor will take about 2seconds to make a full revolution.
@@ -79,7 +73,7 @@ for index in range(200):
 # complete revolution of the motor.
 print("Moving 1 revolution backward in DOUBLE step mode.")
 for index in range(200):
-    stepper0.onestep(stepper.BACKWARD, stepper.DOUBLE)
+    stepper_motor.onestep(stepper.BACKWARD, stepper.DOUBLE)
 
     # Pause 10ms (0.01s) between each step
     time.sleep_ms(10) 
@@ -94,7 +88,7 @@ for index in range(200):
 print("Moving 1 revolution forward in INTERLEAVE mode.")
 start_time = time.ticks_ms()
 for index in range(400):
-    stepper0.onestep(stepper.FORWARD, stepper.INTERLEAVE)
+    stepper_motor.onestep(stepper.FORWARD, stepper.INTERLEAVE)
     
     # Pause 1ms (0.001s) between each step
     time.sleep_ms(1) 
@@ -106,7 +100,7 @@ for index in range(400):
 # more current. Because there are more steps per rotation of the motor.
 print("Moving 1 revolution backward in MICROSTEP MODE.")
 for index in range(3200):
-    stepper0.onestep(stepper.BACKWARD, stepper.MICROSTEP)
+    stepper_motor.onestep(stepper.BACKWARD, stepper.MICROSTEP)
     
     # Sleep 1ms (0.001s) between steps
     time.sleep_ms(1)

@@ -47,7 +47,7 @@ stepper_motor = stepper.StepperMotor(i2c)
 # exactly matches the simple explanation that we walked through in MCHE201
 # lecture.
 print("Moving one step backward in SINGLE mode")
-stepper0.onestep(stepper.FORWARD, stepper.SINGLE)
+stepper_motor.onestep(stepper.FORWARD, stepper.SINGLE)
 
 # We can also move in DOUBLE step mode. This time in reverse.
 # In DOUBLE step mode, the torque of the motor is increased by energizing two 
@@ -58,7 +58,7 @@ stepper0.onestep(stepper.FORWARD, stepper.SINGLE)
 # has a nice explanation of this mode:
 #  https://en.wikipedia.org/wiki/Stepper_motor#Full-step_drive_.28two_phases_on.29
 print("Moving one step backward in DOUBLE mode")
-stepper0.onestep(stepper.BACKWARD, stepper.DOUBLE)
+stepper_motor.onestep(stepper.BACKWARD, stepper.DOUBLE)
 
 # To make the motor move more than one step, we need to repeatedly call
 # the one-step function. The motors in the MCHE201 kit have 200 step/rev
@@ -67,7 +67,7 @@ stepper0.onestep(stepper.BACKWARD, stepper.DOUBLE)
 # motor time to move.
 print("Moving one revolution forward in SINGLE mode")
 for index in range(200):
-    stepper0.onestep(stepper.FORWARD, stepper.SINGLE)
+    stepper_motor.onestep(stepper.FORWARD, stepper.SINGLE)
 
     # Sleep 1ms (0.01s) between steps
     # At this delay, the motor will spin at 30rpm
@@ -81,7 +81,7 @@ for index in range(200):
 # and smoother motion, at the expense of drawing more current.
 print("Moving one revolution backward in MICROSTEP mode")
 for index in range(3200):
-    stepper0.onestep(stepper.BACKWARD, stepper.MICROSTEP)
+    stepper_motor.onestep(stepper.BACKWARD, stepper.MICROSTEP)
     
     # Sleep 1ms (0.001s) between steps
     # At this delay, the motor will spin at 18.75rpm

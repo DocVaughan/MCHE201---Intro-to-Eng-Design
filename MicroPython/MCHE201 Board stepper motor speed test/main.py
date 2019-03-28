@@ -69,7 +69,7 @@ start_time = time.ticks_ms()
 
 # Now, we'll move the motor
 for index in range(200):
-    stepper0.onestep(stepper.FORWARD, stepper.SINGLE)
+    stepper_motor.onestep(stepper.FORWARD, stepper.SINGLE)
     
     # Pause 1ms (0.001s) between each step
     # This means the motor will take about 0.2seconds to make a full revolution.
@@ -87,7 +87,7 @@ print('The elapsed time for SINGLE was {}ms.\n'.format(elapsed_time))
 print("Moving 1 revolution backward in DOUBLE step mode.")
 start_time = time.ticks_ms() # Define a start time
 for index in range(200):
-    stepper0.onestep(stepper.BACKWARD, stepper.DOUBLE)
+    stepper_motor.onestep(stepper.BACKWARD, stepper.DOUBLE)
 
     # Pause 1ms (0.01s) between each step
     time.sleep_ms(1) 
@@ -111,7 +111,7 @@ print('The elapsed time for DOUBLE was {}ms.\n'.format(elapsed_time))
 print("Moving 1 revolution forward in DOUBLE step mode.")
 start_time = time.ticks_ms() # Define a start time
 for index in range(200):
-    stepper0.onestep(stepper.FORWARD, stepper.DOUBLE)
+    stepper_motor.onestep(stepper.FORWARD, stepper.DOUBLE)
 
 # Now that the loop has ended, we get the time again, then compare it to the
 # start time. To do so, we use the time.ticks_diff() method as documented at:
@@ -131,7 +131,7 @@ print('The elapsed time for DOUBLE without a delay was {}ms.\n'.format(elapsed_t
 print("Moving 10 revolutions backward in DOUBLE step mode.")
 start_time = time.ticks_ms() # Define a start time
 for index in range(10*200):
-    stepper0.onestep(stepper.BACKWARD, stepper.DOUBLE)
+    stepper_motor.onestep(stepper.BACKWARD, stepper.DOUBLE)
 
 # Now that the loop has ended, we get the time again, then compare it to the
 # start time. To do so, we use the time.ticks_diff() method as documented at:
@@ -150,7 +150,7 @@ print("Moving 10 revolutions forward in MICROSTEP mode.")
 start_time = time.ticks_ms() # Define a start time
 
 for index in range(10 * 3200):
-    stepper0.onestep(stepper.FORWARD, stepper.MICROSTEP)
+    stepper_motor.onestep(stepper.FORWARD, stepper.MICROSTEP)
 
 # Now that the loop has ended, we get the time again, then compare it to the
 # start time. To do so, we use the time.ticks_diff() method as documented at:
