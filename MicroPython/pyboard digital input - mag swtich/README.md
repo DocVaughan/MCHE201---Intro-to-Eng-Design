@@ -3,7 +3,7 @@ this script is used to read the status of a magnetic switch, like those used in 
 
 * [SparkFun](https://www.sparkfun.com/products/13247) 
 * [McMaster Option 1](https://www.mcmaster.com/#8039a14)
-* [MacMaster Option 2](https://www.mcmaster.com/#8039a21)
+* [McMaster Option 2](https://www.mcmaster.com/#8039a21)
 
 ![Pushbutton Hardware Setup](pyboard_breadboard_magSwitch.png)
 
