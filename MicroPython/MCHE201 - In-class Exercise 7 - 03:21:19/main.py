@@ -1,8 +1,8 @@
 ###############################################################################
 # main.py
 #
-# This script is one way to solve what is typically the 7th in-class exercise 
-# from MCHE201.
+# This script is one way to solve what is typically what is typically the 
+# 7th in-class exercise from MCHE201.
 #
 # # That exercise was given as:
 #  * Attach a potentiometer
