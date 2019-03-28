@@ -28,8 +28,8 @@ while (True):
     input_state = input_pin.value()   # read the state of the input
     
     if (input_state):
-        print("The magnetic is close by.\n")
+        print("The magnet is close by.\n")
     else:
-        print("The magnetic is not close by.\n")
+        print("The magnet is not close by.\n")
     
     time.sleep_ms(100)          # Sleep 100 milliseconds (0.1s)

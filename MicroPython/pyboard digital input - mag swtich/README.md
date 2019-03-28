@@ -1,5 +1,5 @@
 This simple script demonstrates read a digital input connected to pin X7. The internal pull-down resistor is used. In the hardware configuration shown below,
-this script is used to read the status of a magnetic switch, like those used in home alarm systems. The script has been tested with switches from:
+this script is used to read the status of a magnetic switch, like those used in home alarm systems. The script has been tested with the switches listed below:
 
 * [SparkFun](https://www.sparkfun.com/products/13247) 
 * [McMaster Option 1](https://www.mcmaster.com/#8039a14)
