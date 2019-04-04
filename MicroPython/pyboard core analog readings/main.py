@@ -38,7 +38,7 @@ while (True):
     print("Core Temperature:              {:5.2f} C".format(core_temp))
     print("Backup Battery Voltage:        {:5.2f} V".format(core_vbat))
     print("Core Reference Voltage:        {:5.2f} V".format(core_vref))
-    print("Reference Voltage:             {:5.2f} V".format(vref))
+    print("Reference Voltage:             {:5.2f} V\n\n".format(vref))
 
     # sleep for 250ms
     time.sleep_ms(250)
