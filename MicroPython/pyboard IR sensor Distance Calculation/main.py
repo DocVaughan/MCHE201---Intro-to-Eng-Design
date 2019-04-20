@@ -46,7 +46,7 @@ IR_adc = pyb.ADC(pyb.Pin("X20"))
 
 # Now read the pot every 500ms, forever
 while (True):
-    # Read the value of the flex sensor. It should be in the range 0-4095
+    # Read the value of the IR sensor. It should be in the range 0-4095
     IR_value = IR_adc.read()
     
     # We can convert the value to the voltage we are reading. 
