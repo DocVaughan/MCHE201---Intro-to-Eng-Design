@@ -36,7 +36,7 @@ import time
 # Import the library to control the LEDs
 import neoSPI
 
-NUM_LEDS = 60   # Number of LEDs in the array
+NUM_LEDS = 30   # Number of LEDs in the array
 NUM_CYCLE = 5   # Number of LEDS to cycle to bright in the effect
 
 # Define the tuples of GRB colors for each color we want to show
