@@ -1,1 +1,0 @@
-This script includes several ways to print the odd numbers between 1 and 27 to the MicroPython REPL. It is typically the first example done by students in [MCHE201: Introduction to Engineering Design](http://www.ucs.louisiana.edu/~jev9637/MCHE201.html).

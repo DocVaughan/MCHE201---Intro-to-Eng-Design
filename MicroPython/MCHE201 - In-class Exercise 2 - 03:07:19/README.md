@@ -1,3 +1,0 @@
-This script includes several ways to print the odd numbers between 1 and 27 to the MicroPython REPL. When the number is 13, it will print "Counter = 13... Bad Luck!!!" and turn on the red LED. This script leverages the code written for the [first in-class exercise](https://github.com/DocVaughan/MCHE201---Intro-to-Eng-Design/tree/Spring-2019/MicroPython/MCHE201%20-%20In-class%20Exercise%201%20-%2003:07:19), which printed the odd numbers from 1-27.
-
-This is typically the second example done by students in [MCHE201: Introduction to Engineering Design](http://www.ucs.louisiana.edu/~jev9637/MCHE201.html).
