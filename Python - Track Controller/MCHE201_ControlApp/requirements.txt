@@ -1,6 +1,6 @@
 Flask==0.10.1
 Flask-SocketIO
-Jinja2==2.7.2
+Jinja2==2.11.3
 MarkupSafe==0.18
 Werkzeug==0.9.4
 gevent==1.0
