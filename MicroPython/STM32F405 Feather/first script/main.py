@@ -23,4 +23,4 @@
 import pyb
 
 # Turn on the 1st LED
-pyb.LED(1).off()
+pyb.LED(1).on()
